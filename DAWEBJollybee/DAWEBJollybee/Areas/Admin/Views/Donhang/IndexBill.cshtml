@@ -1,0 +1,139 @@
+﻿@model DAWEBJollybee.Models.DONHANG
+
+@{
+    ViewBag.Title = "IndexBill";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/prism/prism.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/components.css">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+
+</head>
+<body>
+    <div class="modal-dialog m-0" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-family: sans-serif; color:coral">Thông tin thanh toán</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <p style="font-weight: 700;margin-bottom: 5px;color: red;padding-top: 10px;padding-left: 25px;font-size: 18px;text-align:center;">Receipt</p>
+            <div class="modal-body" style="padding-top: 10px; padding-bottom: 10px; justify-content: space-around; flex-direction: row; display: flex;">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PAYMENTMETHOD.METHODNAME):
+                        </dt>
+
+                        <dd style="color:forestgreen;">
+                            @Html.DisplayFor(model => model.PAYMENTMETHOD.METHODNAME)
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TONGTIEN):
+                        </dt>
+                        @if (Model.TONGTIEN.Value > 0)
+                        {
+                           <dd>
+                            @*@Html.DisplayFor(model => model.TONGTIEN)*@ @Model.TONGTIEN.Value.ToString("#,####") đ
+                        </dd>
+                        }
+                        else
+                        {
+                            <dd>
+                                @Html.DisplayFor(model => model.TONGTIEN) đ
+                            </dd>
+                        }                       
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PHISHIP):
+                        </dt>
+
+                        <dd>
+                            @*@Html.DisplayFor(model => model.PHISHIP)*@ @Model.PHISHIP.Value.ToString("#,####") đ
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.KHUYENMAI):
+                        </dt>
+                        @if (Model.KHUYENMAI.Value > 0)
+                        {
+                            <dd>
+                                @*@Html.DisplayFor(model => model.KHUYENMAI)*@ @Model.KHUYENMAI.Value.ToString("#,####") đ
+                            </dd>
+
+                        }
+                        else
+                        {
+                            <dd>
+                                @Html.DisplayFor(model => model.KHUYENMAI) đ
+                            </dd>
+                        }
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.THANHTIEN):
+                        </dt>
+                        @if (Model.THANHTIEN.Value > 0)
+                        {
+                            <dd style="color: red; font-weight: 600">
+                                @*@Html.DisplayFor(model => model.THANHTIEN)*@ @Model.THANHTIEN.Value.ToString("#,####") đ
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd style="color: red; font-weight: 600">
+                                @Html.DisplayFor(model => model.THANHTIEN) đ
+                            </dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: cornflowerblue;">Close</button>
+            </div>
+            <style>
+                .btn-primary.btn-del:active, .btn-primary.btn-del:focus, .btn-primary.btn-del:focus:active, .btn-primary.btn-del:hover {
+                    background-color: #ff3333 !important;
+                    box-shadow: 0 2px 6px #ff8080 !important;
+                }
+
+                dl {
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: 10px;
+                    gap: 10px;
+                    justify-content: space-between;
+                }
+
+                .custom-checkbox.disabled {
+                    pointer-events: none;
+                    opacity: 1;
+                }
+            </style>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

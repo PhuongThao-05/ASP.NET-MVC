@@ -1,0 +1,123 @@
+﻿@model DAWEBJollybee.Models.HINHANHSP
+
+@{
+    ViewBag.Title = "CreateImg";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Forms &rsaquo; Form Validation &mdash; Stisla</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/components.css">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
+</head>
+
+<body>
+    <div class="section-header">
+        <h1>Create Product's Image</h1>
+    </div>
+    <div class="section-body">
+        <div class="card">
+            @using (Html.BeginForm("CreateImg", "SanPham", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="card-header" style="justify-content:space-between;">
+                    <h4>Thêm hình ảnh sản phẩm</h4>
+                    <div>
+                        <a href="@Url.Action("IndexImg",new { id = ViewBag.Id })" style="text-decoration: none; font-size: 16px;">Back to List <i class="fas fa-arrow-alt-circle-right" style="font-size: 16px;"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IDSP, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IDSP, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.IDSP, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IMAGE, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" name="fImage" class="image-input" onchange="previewImage(this);" />
+                            @Html.ValidationMessageFor(model => model.IMAGE, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="col-md-offset-2 col-md-10">
+                            <img id="preview" style="max-width: 200px; max-height: 200px; display: none; margin-left: 198px;" />
+                        </div>
+                    </div>
+
+                    <script>
+                        function previewImage(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    var previewElement = document.getElementById('preview');
+                                    previewElement.style.display = 'block';
+                                    previewElement.style.marginBottom = '15px';
+                                    previewElement.setAttribute('src', e.target.result);
+                                };
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        function resetImage() {
+                            var previewElement = document.getElementById('preview');
+                            previewElement.style.display = 'none';
+                            previewElement.setAttribute('src', '');
+                        }
+                    </script>
+            </div>
+                <div class="card-footer text-right">
+                    <button class="btn btn-default reset-act" type="reset" style="width:130px;" onclick="resetImage();">Reset</button>
+                    <input type="submit" value="Create" style="width:130px;" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .reset-act:hover {
+            background-color: #d2d2e0 !important;
+        }
+    </style>
+    <!-- General JS Scripts -->
+    <script src="~/Assets/Admin/dist/assets/modules/jquery.min.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/tooltip.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/moment.min.js"></script>
+    <script src="~/Assets/Admin/dist/assets/js/stisla.js"></script>
+
+    <!-- JS Libraies -->
+    <!-- Page Specific JS File -->
+    <!-- Template JS File -->
+    <script src="~/Assets/Admin/dist/assets/js/scripts.js"></script>
+    <script src="~/Assets/Admin/dist/assets/js/custom.js"></script>
+</body>
+</html>

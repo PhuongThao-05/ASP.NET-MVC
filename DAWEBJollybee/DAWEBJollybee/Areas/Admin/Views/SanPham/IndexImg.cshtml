@@ -1,0 +1,181 @@
+﻿@model IEnumerable<DAWEBJollybee.Models.HINHANHSP>
+
+@{
+    ViewBag.Title = "IndexImg";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+<div class="section-header">
+    <h1>Product's Image</h1>
+</div>
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <a href="@Url.Action("CreateImg")" class="btn btn-primary btn-action btn-act" data-toggle="tooltip" title="Thêm" style="background-color: #80aaff; border: solid 1px #80aaff; box-shadow: 0 2px 6px #99bbff; margin-left: 32px; padding: 6px 16px; border-radius: 4px; ">
+                            <i class="fas fa-plus" style="font-size:18px;padding:5px 0;"></i>
+                        </a>
+                    </h4> 
+                    <div class="card-header-form">
+                        <a href="@Url.Action("Index")" class="btn btn-primary btn-action btn-act" data-toggle="tooltip" title="Back to List" style="background-color: #80aaff; border: solid 1px #80aaff; box-shadow: 0 2px 6px #99bbff; margin-left: 32px; padding: 6px 16px; border-radius: 4px; ">
+                            <i class="fas fa-arrow-alt-circle-right" style="font-size: 18px; padding: 5px 0;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="text-align:center;">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDHA)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDSP)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IMAGE)
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IDHA)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IDSP)
+                            </td>
+                            <td>
+                                <img src="  @Html.DisplayFor(modelItem => item.IMAGE)" style="max-width: 100px; max-height: 100px;" />
+                            </td>                           
+                            <td>
+                                <a href="@Url.Action("EditImg", new { id = item.IDHA })" class="btn btn-action btn-primary  mr-1 btn-act" data-toggle="tooltip" title="Sửa" style="background-color: #33cc33; border: solid 1px #33cc33; box-shadow: 0 2px 6px #99ff99;">
+                                    <i class="fas fa-pencil-alt" style="font-size: 11px;"></i>
+                                </a>
+                                <a href="#" data-id="@item.IDHA" class="DeleteModalButton btn btn-danger btn-action btn-act" data-toggle="tooltip" title="Xóa" style="background-color: #fc544b; border: solid 1px #fc544b; box-shadow: 0 2px 6px #fd9b96; ">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                            }
+                        </table>
+                        <style>
+                            .btn-primary.btn-act:active, .btn-primary.btn-act:focus, .btn-primary.btn-act:focus:active, .btn-primary.btn-act:hover {
+                                background-color: #ffcccc !important;
+                                box-shadow: 0 2px 6px #acb5f6 !important;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="createmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Nội dung modal được load từ AJAX sẽ được đặt ở đây -->
+                <div class="modal-body">
+                    <div id="error-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện click cho nút xóa
+        $('.DeleteModalButton').on('click', function (event) {
+            event.preventDefault();
+            var itemId = $(this).data('id');
+            loadYourModal('/Admin/SanPham/DeleteImg/' + itemId, 'deleteForm', itemId);
+        });
+        // Submit form delete bằng AJAX
+        $('#createmodal').on('submit', '#deleteForm', function (event) {
+            event.preventDefault(); // Chặn hành động mặc định của form
+            saveFormData(); // Gọi hàm xử lý submit
+        });
+
+        // Hàm loadYourModal
+        function loadYourModal(actionUrl, formId, itemId) {
+            $.ajax({
+                url: actionUrl,
+                type: 'GET',
+                data: { id: itemId },
+                success: function (data) {
+                    $('#createmodal .modal-content').html(data);
+                    $('#createmodal').data('itemId', itemId);
+                    $('#createmodal').data('formId', formId);
+                    $('#createmodal').modal({
+                        show: true,
+                        backdrop: 'static',
+                    });
+                },
+                error: function () {
+                    alert('Failed to load modal content.');
+                }
+            });
+        }
+        // Hàm xử lý khi submit form delete
+        function saveFormData(event) {
+            var formId = $('#createmodal').data('formId');
+            var itemId = $('#createmodal').data('itemId');
+            $.ajax({
+                url: '/Admin/SanPham/DeleteImg/' + itemId,
+                type: 'POST',
+                data: $('#' + formId).serialize(),
+                success: function (data) {
+                    if ($(data).find('.text-danger').length > 0) {
+                        $('#createmodal .modal-content').html(data);
+                    } else {
+                        $('#createmodal').modal('hide');
+                        $('#createmodal .modal-content').html('');
+                        // Kiểm tra xem có chuyển hướng hay không
+                        if (data.success && data.redirectUrl) {
+                            // Nếu có chuyển hướng, thực hiện chuyển hướng
+                            window.location.href = data.redirectUrl;
+                        }
+                    }
+                },
+                error: function () {
+                    alert('Failed to submit form.');
+                }
+            });
+            // Chặn sự kiện submit của form
+            event.preventDefault();
+        }
+    })
+</script>
+<style>
+    #createmodal {
+        background-color: rgba(0, 0, 0, 0.5); /* Màu nền đen với độ trong suốt */
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050 !important;
+    }
+
+    .modal-backdrop {
+        display: none !important;
+    }
+</style>
+<!-- General JS Scripts -->
+<script src="~/Assets/Admin/dist/assets/modules/jquery.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/tooltip.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/moment.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<script src="~/Assets/Admin/dist/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="~/Assets/Admin/dist/assets/js/page/components-table.js"></script>
+

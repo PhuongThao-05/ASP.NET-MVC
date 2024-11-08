@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm require</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinner-grow {
+            --bs-spinner-width: 3rem;
+            --bs-spinner-height: 3rem;
+            color: #81c408; /* Thay đổi màu của spinner */
+        }
+        .loading-text {
+            color: #3399ff;
+            margin-left: 10px;
+            font-size: 1.5rem;
+        }
+        body {
+            background-size: cover;
+            background-image: url(/Assets/User/img/bgsucs.jpg);
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <span class="loading-text">Waiting to confirm ...</span>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const vnp_ResponseCode = urlParams.get('vnp_ResponseCode');
+
+        if (vnp_ResponseCode === '00') {
+            window.location.href = '@Url.Action("ReturnVNPAY", "Checkout")';
+        }
+        else {
+              window.location.href = '@Url.Action("VNPAYCancel", "Checkout")';
+        }
+     });
+    </script>
+</body>
+</html>

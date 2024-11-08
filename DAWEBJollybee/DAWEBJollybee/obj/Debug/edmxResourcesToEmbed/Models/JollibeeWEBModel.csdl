@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JOLLYBEEWEBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="JOLLYBEEWEBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CHITIETDONHANG" EntityType="JOLLYBEEWEBModel.CHITIETDONHANG" />
+    <EntitySet Name="DONHANG" EntityType="JOLLYBEEWEBModel.DONHANG" />
+    <EntitySet Name="HINHANHSP" EntityType="JOLLYBEEWEBModel.HINHANHSP" />
+    <EntitySet Name="KHACHHANG" EntityType="JOLLYBEEWEBModel.KHACHHANG" />
+    <EntitySet Name="LOAISP" EntityType="JOLLYBEEWEBModel.LOAISP" />
+    <EntitySet Name="NGUOIDUNG" EntityType="JOLLYBEEWEBModel.NGUOIDUNG" />
+    <EntitySet Name="PAYMENTMETHOD" EntityType="JOLLYBEEWEBModel.PAYMENTMETHOD" />
+    <EntitySet Name="QLVOUCHER" EntityType="JOLLYBEEWEBModel.QLVOUCHER" />
+    <EntitySet Name="SANPHAM" EntityType="JOLLYBEEWEBModel.SANPHAM" />
+    <EntitySet Name="sysdiagrams" EntityType="JOLLYBEEWEBModel.sysdiagrams" />
+    <EntitySet Name="TRANGTHAIDH" EntityType="JOLLYBEEWEBModel.TRANGTHAIDH" />
+    <EntitySet Name="VOUCHER" EntityType="JOLLYBEEWEBModel.VOUCHER" />
+    <AssociationSet Name="FK__CHITIETDON__IDDH__440B1D61" Association="JOLLYBEEWEBModel.FK__CHITIETDON__IDDH__440B1D61">
+      <End Role="DONHANG" EntitySet="DONHANG" />
+      <End Role="CHITIETDONHANG" EntitySet="CHITIETDONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CHITIETDON__IDSP__44FF419A" Association="JOLLYBEEWEBModel.FK__CHITIETDON__IDSP__44FF419A">
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+      <End Role="CHITIETDONHANG" EntitySet="CHITIETDONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DONHANG__IDCoupo__412EB0B6" Association="JOLLYBEEWEBModel.FK__DONHANG__IDCoupo__412EB0B6">
+      <End Role="VOUCHER" EntitySet="VOUCHER" />
+      <End Role="DONHANG" EntitySet="DONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DONHANG__IDKH__3C69FB99" Association="JOLLYBEEWEBModel.FK__DONHANG__IDKH__3C69FB99">
+      <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+      <End Role="DONHANG" EntitySet="DONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DONHANG__IDPAYME__3D5E1FD2" Association="JOLLYBEEWEBModel.FK__DONHANG__IDPAYME__3D5E1FD2">
+      <End Role="PAYMENTMETHOD" EntitySet="PAYMENTMETHOD" />
+      <End Role="DONHANG" EntitySet="DONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TRANGTHAID__IDDH__47DBAE45" Association="JOLLYBEEWEBModel.FK__TRANGTHAID__IDDH__47DBAE45">
+      <End Role="DONHANG" EntitySet="DONHANG" />
+      <End Role="TRANGTHAIDH" EntitySet="TRANGTHAIDH" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HINHANHSP__IDSP__37A5467C" Association="JOLLYBEEWEBModel.FK__HINHANHSP__IDSP__37A5467C">
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+      <End Role="HINHANHSP" EntitySet="HINHANHSP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KHACHHANG__USERN__286302EC" Association="JOLLYBEEWEBModel.FK__KHACHHANG__USERN__286302EC">
+      <End Role="NGUOIDUNG" EntitySet="NGUOIDUNG" />
+      <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__QLVOUCHER__IDKH__2F10007B" Association="JOLLYBEEWEBModel.FK__QLVOUCHER__IDKH__2F10007B">
+      <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+      <End Role="QLVOUCHER" EntitySet="QLVOUCHER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SANPHAM__IDLSP__33D4B598" Association="JOLLYBEEWEBModel.FK__SANPHAM__IDLSP__33D4B598">
+      <End Role="LOAISP" EntitySet="LOAISP" />
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__QLVOUCHER__IDCou__2E1BDC42" Association="JOLLYBEEWEBModel.FK__QLVOUCHER__IDCou__2E1BDC42">
+      <End Role="VOUCHER" EntitySet="VOUCHER" />
+      <End Role="QLVOUCHER" EntitySet="QLVOUCHER" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CHITIETDONHANG">
+    <Key>
+      <PropertyRef Name="IDDH" />
+      <PropertyRef Name="IDSP" />
+    </Key>
+    <Property Name="IDDH" Type="Int32" Nullable="false" />
+    <Property Name="IDSP" Type="Int32" Nullable="false" />
+    <Property Name="SOLUONG" Type="Int32" />
+    <Property Name="GIATIEN" Type="Double" />
+    <NavigationProperty Name="DONHANG" Relationship="JOLLYBEEWEBModel.FK__CHITIETDON__IDDH__440B1D61" FromRole="CHITIETDONHANG" ToRole="DONHANG" />
+    <NavigationProperty Name="SANPHAM" Relationship="JOLLYBEEWEBModel.FK__CHITIETDON__IDSP__44FF419A" FromRole="CHITIETDONHANG" ToRole="SANPHAM" />
+  </EntityType>
+  <EntityType Name="DONHANG">
+    <Key>
+      <PropertyRef Name="IDDH" />
+    </Key>
+    <Property Name="IDDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDKH" Type="Int32" />
+    <Property Name="NGAYDAT" Type="DateTime" Precision="0" />
+    <Property Name="IDPAYMENT" Type="Int32" />
+    <Property Name="TONGTIEN" Type="Double" />
+    <Property Name="PHISHIP" Type="Double" />
+    <Property Name="KHUYENMAI" Type="Double" />
+    <Property Name="THANHTIEN" Type="Double" />
+    <Property Name="LastestState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HOANTAT" Type="Boolean" />
+    <Property Name="HUY" Type="Boolean" />
+    <Property Name="DeleteOrder" Type="Boolean" />
+    <Property Name="IDCoupon" Type="Int32" />
+    <NavigationProperty Name="CHITIETDONHANG" Relationship="JOLLYBEEWEBModel.FK__CHITIETDON__IDDH__440B1D61" FromRole="DONHANG" ToRole="CHITIETDONHANG" />
+    <NavigationProperty Name="VOUCHER" Relationship="JOLLYBEEWEBModel.FK__DONHANG__IDCoupo__412EB0B6" FromRole="DONHANG" ToRole="VOUCHER" />
+    <NavigationProperty Name="KHACHHANG" Relationship="JOLLYBEEWEBModel.FK__DONHANG__IDKH__3C69FB99" FromRole="DONHANG" ToRole="KHACHHANG" />
+    <NavigationProperty Name="PAYMENTMETHOD" Relationship="JOLLYBEEWEBModel.FK__DONHANG__IDPAYME__3D5E1FD2" FromRole="DONHANG" ToRole="PAYMENTMETHOD" />
+    <NavigationProperty Name="TRANGTHAIDH" Relationship="JOLLYBEEWEBModel.FK__TRANGTHAID__IDDH__47DBAE45" FromRole="DONHANG" ToRole="TRANGTHAIDH" />
+  </EntityType>
+  <EntityType Name="HINHANHSP">
+    <Key>
+      <PropertyRef Name="IDHA" />
+    </Key>
+    <Property Name="IDHA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDSP" Type="Int32" />
+    <Property Name="IMAGE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SANPHAM" Relationship="JOLLYBEEWEBModel.FK__HINHANHSP__IDSP__37A5467C" FromRole="HINHANHSP" ToRole="SANPHAM" />
+  </EntityType>
+  <EntityType Name="KHACHHANG">
+    <Key>
+      <PropertyRef Name="IDKH" />
+    </Key>
+    <Property Name="IDKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="HOTEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DONHANG" Relationship="JOLLYBEEWEBModel.FK__DONHANG__IDKH__3C69FB99" FromRole="KHACHHANG" ToRole="DONHANG" />
+    <NavigationProperty Name="NGUOIDUNG" Relationship="JOLLYBEEWEBModel.FK__KHACHHANG__USERN__286302EC" FromRole="KHACHHANG" ToRole="NGUOIDUNG" />
+    <NavigationProperty Name="QLVOUCHER" Relationship="JOLLYBEEWEBModel.FK__QLVOUCHER__IDKH__2F10007B" FromRole="KHACHHANG" ToRole="QLVOUCHER" />
+  </EntityType>
+  <EntityType Name="LOAISP">
+    <Key>
+      <PropertyRef Name="IDLSP" />
+    </Key>
+    <Property Name="IDLSP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TENLOAISP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SANPHAM" Relationship="JOLLYBEEWEBModel.FK__SANPHAM__IDLSP__33D4B598" FromRole="LOAISP" ToRole="SANPHAM" />
+  </EntityType>
+  <EntityType Name="NGUOIDUNG">
+    <Key>
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PASSWORD" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IDENTIFY" Type="Boolean" />
+    <NavigationProperty Name="KHACHHANG" Relationship="JOLLYBEEWEBModel.FK__KHACHHANG__USERN__286302EC" FromRole="NGUOIDUNG" ToRole="KHACHHANG" />
+  </EntityType>
+  <EntityType Name="PAYMENTMETHOD">
+    <Key>
+      <PropertyRef Name="IDPAYMENT" />
+    </Key>
+    <Property Name="IDPAYMENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="METHODNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DONHANG" Relationship="JOLLYBEEWEBModel.FK__DONHANG__IDPAYME__3D5E1FD2" FromRole="PAYMENTMETHOD" ToRole="DONHANG" />
+  </EntityType>
+  <EntityType Name="QLVOUCHER">
+    <Key>
+      <PropertyRef Name="IDCoupon" />
+      <PropertyRef Name="IDKH" />
+    </Key>
+    <Property Name="IDCoupon" Type="Int32" Nullable="false" />
+    <Property Name="IDKH" Type="Int32" Nullable="false" />
+    <Property Name="StateUse" Type="Boolean" />
+    <Property Name="NGAYTHEM" Type="DateTime" Precision="3" />
+    <Property Name="NGAYSD" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="KHACHHANG" Relationship="JOLLYBEEWEBModel.FK__QLVOUCHER__IDKH__2F10007B" FromRole="QLVOUCHER" ToRole="KHACHHANG" />
+    <NavigationProperty Name="VOUCHER" Relationship="JOLLYBEEWEBModel.FK__QLVOUCHER__IDCou__2E1BDC42" FromRole="QLVOUCHER" ToRole="VOUCHER" />
+  </EntityType>
+  <EntityType Name="SANPHAM">
+    <Key>
+      <PropertyRef Name="IDSP" />
+    </Key>
+    <Property Name="IDSP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDLSP" Type="Int32" />
+    <Property Name="HINHANH" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TENSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MOTA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DONGIA" Type="Double" />
+    <Property Name="StateProduct" Type="Boolean" />
+    <NavigationProperty Name="CHITIETDONHANG" Relationship="JOLLYBEEWEBModel.FK__CHITIETDON__IDSP__44FF419A" FromRole="SANPHAM" ToRole="CHITIETDONHANG" />
+    <NavigationProperty Name="HINHANHSP" Relationship="JOLLYBEEWEBModel.FK__HINHANHSP__IDSP__37A5467C" FromRole="SANPHAM" ToRole="HINHANHSP" />
+    <NavigationProperty Name="LOAISP" Relationship="JOLLYBEEWEBModel.FK__SANPHAM__IDLSP__33D4B598" FromRole="SANPHAM" ToRole="LOAISP" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TRANGTHAIDH">
+    <Key>
+      <PropertyRef Name="IDSTATE" />
+    </Key>
+    <Property Name="IDSTATE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDDH" Type="Int32" />
+    <Property Name="CurrentState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="DONHANG" Relationship="JOLLYBEEWEBModel.FK__TRANGTHAID__IDDH__47DBAE45" FromRole="TRANGTHAIDH" ToRole="DONHANG" />
+  </EntityType>
+  <EntityType Name="VOUCHER">
+    <Key>
+      <PropertyRef Name="IDCoupon" />
+    </Key>
+    <Property Name="IDCoupon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TENVOUCHER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GIATRI" Type="Double" />
+    <Property Name="HSD" Type="DateTime" Precision="3" />
+    <Property Name="StateCoupon" Type="Boolean" />
+    <NavigationProperty Name="DONHANG" Relationship="JOLLYBEEWEBModel.FK__DONHANG__IDCoupo__412EB0B6" FromRole="VOUCHER" ToRole="DONHANG" />
+    <NavigationProperty Name="QLVOUCHER" Relationship="JOLLYBEEWEBModel.FK__QLVOUCHER__IDCou__2E1BDC42" FromRole="VOUCHER" ToRole="QLVOUCHER" />
+  </EntityType>
+  <Association Name="FK__CHITIETDON__IDDH__440B1D61">
+    <End Type="JOLLYBEEWEBModel.DONHANG" Role="DONHANG" Multiplicity="1" />
+    <End Type="JOLLYBEEWEBModel.CHITIETDONHANG" Role="CHITIETDONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONHANG">
+        <PropertyRef Name="IDDH" />
+      </Principal>
+      <Dependent Role="CHITIETDONHANG">
+        <PropertyRef Name="IDDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CHITIETDON__IDSP__44FF419A">
+    <End Type="JOLLYBEEWEBModel.SANPHAM" Role="SANPHAM" Multiplicity="1" />
+    <End Type="JOLLYBEEWEBModel.CHITIETDONHANG" Role="CHITIETDONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SANPHAM">
+        <PropertyRef Name="IDSP" />
+      </Principal>
+      <Dependent Role="CHITIETDONHANG">
+        <PropertyRef Name="IDSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DONHANG__IDCoupo__412EB0B6">
+    <End Type="JOLLYBEEWEBModel.VOUCHER" Role="VOUCHER" Multiplicity="0..1" />
+    <End Type="JOLLYBEEWEBModel.DONHANG" Role="DONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VOUCHER">
+        <PropertyRef Name="IDCoupon" />
+      </Principal>
+      <Dependent Role="DONHANG">
+        <PropertyRef Name="IDCoupon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DONHANG__IDKH__3C69FB99">
+    <End Type="JOLLYBEEWEBModel.KHACHHANG" Role="KHACHHANG" Multiplicity="0..1" />
+    <End Type="JOLLYBEEWEBModel.DONHANG" Role="DONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="IDKH" />
+      </Principal>
+      <Dependent Role="DONHANG">
+        <PropertyRef Name="IDKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DONHANG__IDPAYME__3D5E1FD2">
+    <End Type="JOLLYBEEWEBModel.PAYMENTMETHOD" Role="PAYMENTMETHOD" Multiplicity="0..1" />
+    <End Type="JOLLYBEEWEBModel.DONHANG" Role="DONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAYMENTMETHOD">
+        <PropertyRef Name="IDPAYMENT" />
+      </Principal>
+      <Dependent Role="DONHANG">
+        <PropertyRef Name="IDPAYMENT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TRANGTHAID__IDDH__47DBAE45">
+    <End Type="JOLLYBEEWEBModel.DONHANG" Role="DONHANG" Multiplicity="0..1" />
+    <End Type="JOLLYBEEWEBModel.TRANGTHAIDH" Role="TRANGTHAIDH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONHANG">
+        <PropertyRef Name="IDDH" />
+      </Principal>
+      <Dependent Role="TRANGTHAIDH">
+        <PropertyRef Name="IDDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HINHANHSP__IDSP__37A5467C">
+    <End Type="JOLLYBEEWEBModel.SANPHAM" Role="SANPHAM" Multiplicity="0..1" />
+    <End Type="JOLLYBEEWEBModel.HINHANHSP" Role="HINHANHSP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SANPHAM">
+        <PropertyRef Name="IDSP" />
+      </Principal>
+      <Dependent Role="HINHANHSP">
+        <PropertyRef Name="IDSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KHACHHANG__USERN__286302EC">
+    <End Type="JOLLYBEEWEBModel.NGUOIDUNG" Role="NGUOIDUNG" Multiplicity="0..1" />
+    <End Type="JOLLYBEEWEBModel.KHACHHANG" Role="KHACHHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NGUOIDUNG">
+        <PropertyRef Name="USERNAME" />
+      </Principal>
+      <Dependent Role="KHACHHANG">
+        <PropertyRef Name="USERNAME" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__QLVOUCHER__IDKH__2F10007B">
+    <End Type="JOLLYBEEWEBModel.KHACHHANG" Role="KHACHHANG" Multiplicity="1" />
+    <End Type="JOLLYBEEWEBModel.QLVOUCHER" Role="QLVOUCHER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="IDKH" />
+      </Principal>
+      <Dependent Role="QLVOUCHER">
+        <PropertyRef Name="IDKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SANPHAM__IDLSP__33D4B598">
+    <End Type="JOLLYBEEWEBModel.LOAISP" Role="LOAISP" Multiplicity="0..1" />
+    <End Type="JOLLYBEEWEBModel.SANPHAM" Role="SANPHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAISP">
+        <PropertyRef Name="IDLSP" />
+      </Principal>
+      <Dependent Role="SANPHAM">
+        <PropertyRef Name="IDLSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__QLVOUCHER__IDCou__2E1BDC42">
+    <End Type="JOLLYBEEWEBModel.VOUCHER" Role="VOUCHER" Multiplicity="1" />
+    <End Type="JOLLYBEEWEBModel.QLVOUCHER" Role="QLVOUCHER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VOUCHER">
+        <PropertyRef Name="IDCoupon" />
+      </Principal>
+      <Dependent Role="QLVOUCHER">
+        <PropertyRef Name="IDCoupon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,855 @@
+﻿@model List<DAWEBJollybee.Models.DONHANG>
+@{
+    ViewBag.Title = "My Order";
+    Layout = "~/Areas/User/Views/Shared/Home_Layout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function selectTab(tabName) {
+            $('.nav-link').removeClass('active');
+            $('.nav-link[href="#' + tabName + '"]').addClass('active');
+            $('.tab-pane').removeClass('show active');
+            $('#' + tabName).addClass('show active');
+        }
+        selectTab('tab-1');
+        // Kích hoạt chuyển đổi tab
+        $('.nav-link').on('click', function (event) {
+            event.preventDefault();
+            $('.nav-link').removeClass('active');
+            $(this).addClass('active');
+            $('.tab-pane').removeClass('show active');
+
+            $($(this).attr('href')).addClass('show active');
+        });
+    // Xác nhận hủy đơn hàng
+    $('.view').on('click', function (event) {
+        event.preventDefault();
+        var orderId = $(this).closest('tr').find('td:first-child').text();
+        $('#confirmCancel').attr('data-order-id', orderId);
+        $('#cancelOrderModal').modal('show');
+    });
+
+    $('#confirmCancel').on('click', function () {
+        var orderId = $(this).attr('data-order-id');
+        $.ajax({
+            url: '@Url.Action("Cancel", "MyOrder")',
+            type: 'POST',
+            data: { orderId: orderId },
+            success: function (response) {
+                if (response.success) {
+                    $('#cancelOrderModal').modal('hide');
+                    location.reload();
+                    selectTab('tab-5');
+                } else {
+                    alert('Đã xảy ra lỗi: ' + response.errorMessage);
+                }
+            },
+            error: function () {
+                alert('Đã xảy ra lỗi khi gửi yêu cầu hủy đơn hàng.');
+            }
+        });
+    });
+
+        $('#cancelOrderNo, .close').on('click', function () {
+        // Đóng modal popup
+        $('#cancelOrderModal').modal('hide');
+    });
+    $('#cancelOrderModal').on('hidden.bs.modal', function () {
+        // Đóng modal popup khi nó được ẩn đi
+        $('#cancelOrderModal').modal('hide');
+    });
+        // Chọn tab 5 sau khi trang được tải lại sau khi hủy đơn hàng
+        var canceledOrder = localStorage.getItem('canceledOrder');
+        if (canceledOrder === 'true') {
+            selectTab('tab-5');
+            localStorage.removeItem('canceledOrder');
+        }
+
+        $('#confirmCancel').on('click', function () {
+            localStorage.setItem('canceledOrder', 'true');
+        });
+});
+</script>
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <!-- Account Sidebar-->
+                    <div class="author-card pb-3">
+                        <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg); cursor: pointer;">
+
+                            <a class="btn btn-style-1 btn-white btn-sm" href=""> <i class="fas fa-edit"></i> &nbsp;Sửa thông tin</a>
+
+                        </div>
+                        <div class="author-card-profile">
+                            <div class="author-card-avatar">
+                                <img src="~/Assets/User/img/avartavuithoi.png" alt="Daniel Adams">
+                            </div>
+                            <div class="author-card-details">
+                                <h5 class="author-card-name text-lg">@Session["user"]</h5><span class="author-card-position">Joined February 06, 2017</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard" style="box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);">
+                        <nav class="list-group list-group-flush">
+                            <a class="list-group-item active" href="@Url.Action("Index", "MyOrder")">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Orders List</div>
+                                </div>
+                            </a>
+                            <a class="list-group-item " href="@Url.Action("Index", "KhachHangUI")">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <i class="fas fa-user-alt"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Profile Settings</div>
+                                </div>
+                            </a>
+                            <a class="list-group-item" href="@Url.Action("ManageVoucher", "AddVoucher")">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">My Vouchers</div>
+                                </div>
+                            </a>
+                            <a class="list-group-item" href="#" target="__blank">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <i class="fas fa-bell"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Notification</div>
+                                </div>
+                            </a>
+                            <a class="list-group-item" href="#" target="__blank">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <i class="fas fa-question-circle"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Help</div>
+                                </div>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-8" style="border-radius: 6px; border: 1px solid #e0e0eb; box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);">
+                    <div class="tab-class text-center" style="padding-top:10px;">
+                        <ul class="nav nav-pills d-inline-flex text-center mb-5">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tab-1">
+                                    <span style="width: 130px;">Confirm</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tab-2">
+                                    <span style="width: 130px;">Preparing</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tab-3">
+                                    <span style="width: 130px;">Delivering</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4">
+                                    <span style="width: 130px;">Order arrived</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tab-5">
+                                    <span style="width: 130px;">Order Canceled</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            <div class="row g-4">
+                                <!-- Nội dung cho tab Order chờ xác nhận -->
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>IDDH</th>
+                                            <th>Ngày đặt</th>
+                                            <th>Thành tiền</th>
+                                            <th>Status</th>
+                                            <th>Cancel</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            List<DAWEBJollybee.Models.DONHANG> data = (List<DAWEBJollybee.Models.DONHANG>)ViewBag.Order;
+
+                                            for (int i = 0; i < data.Count; i++)
+                                            {
+
+                                                if (data[i].LastestState == "Chờ xác nhận")
+                                                {
+                                                    <tr>
+                                                        <td>@data[i].IDDH</td>
+                                                        <td>@data[i].NGAYDAT.Value.ToString("dd/MM/yyyy")</td>
+                                                        <td>@data[i].THANHTIEN</td>
+                                                        <td><span class="status text-info">&bull;</span> @data[i].LastestState</td>
+                                                        <td style=" padding-left: 26px;">
+                                                            <a href="#" class="view" title="Cancel" data-target="#cancelOrderModal" data-toggle="modal"><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                        <td style="text-align: center;">
+                                                            <a href="@Url.Action("ViewOrderDetail", "MyOrder", new { iddh = data[i].IDDH } )" title="View Details" data-toggle="tooltip"><i class="fa fa-newspaper"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="tab-2" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <!-- Nội dung cho tab Preparing -->
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>IDDH</th>
+                                            <th>Ngày đặt</th>
+                                            <th>Thành tiền</th>
+                                            <th>Status</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+
+                                            for (int i = 0; i < data.Count; i++)
+                                            {
+
+                                                if (data[i].LastestState == "Đang chuẩn bị đơn hàng")
+                                                {
+                                                    <tr>
+                                                        <td>@data[i].IDDH</td>
+                                                        <td>@data[i].NGAYDAT.Value.ToString("dd/MM/yyyy")</td>
+                                                        <td>@data[i].THANHTIEN</td>
+                                                        <td><span class="status text-success">&bull;</span> @data[i].LastestState</td>
+                                                        <td style="text-align: center;"><a href="@Url.Action("ViewOrderDetail", "MyOrder", new { iddh = data[i].IDDH } )" title="View Details" data-toggle="tooltip"><i class="fa fa-newspaper"></i></a></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>IDDH</th>
+                                            <th>Ngày đặt</th>
+                                            <th>Thành tiền</th>
+                                            <th>Status</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+
+                                            for (int i = 0; i < data.Count; i++)
+                                            {
+
+                                                if (data[i].LastestState == "Đang giao hàng")
+                                                {
+                                                    <tr>
+                                                        <td>@data[i].IDDH</td>
+                                                        <td>@data[i].NGAYDAT.Value.ToString("dd/MM/yyyy")</td>
+                                                        <td>@data[i].THANHTIEN</td>
+                                                        <td><span class="status text-warning">&bull;</span> @data[i].LastestState</td>
+                                                        <td style="text-align: center;"><a href="@Url.Action("ViewOrderDetail", "MyOrder", new { iddh = data[i].IDDH })" title="View Details" data-toggle="tooltip"><i class="fa fa-newspaper"></i></a></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab-4" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>IDDH</th>
+                                            <th>Ngày đặt</th>
+                                            <th>Thành tiền</th>
+                                            <th>Status</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+
+                                            for (int i = 0; i < data.Count; i++)
+                                            {
+
+                                                if (data[i].LastestState == "Đã giao hàng thành công")
+                                                {
+                                                    <tr>
+                                                        <td>@data[i].IDDH</td>
+                                                        <td>@data[i].NGAYDAT.Value.ToString("dd/MM/yyyy")</td>
+                                                        <td>@data[i].THANHTIEN</td>
+                                                        <td><span class="status text-success">&bull;</span> @data[i].LastestState</td>
+                                                        <td style="text-align: center;"><a href="@Url.Action("ViewOrderDetail", "MyOrder", new { iddh = data[i].IDDH })" title="View Details" data-toggle="tooltip"><i class="fa fa-newspaper"></i></a></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab-5" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                      
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>IDDH</th>
+                                            <th>Ngày đặt</th>
+                                            <th>Thành tiền</th>
+                                            <th>Status</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+
+                                            for (int i = 0; i < data.Count; i++)
+                                            {
+
+                                                if (data[i].LastestState == "Hủy đơn hàng")
+                                                {
+                                                    <tr>
+                                                        <td>@data[i].IDDH</td>
+                                                        <td>@data[i].NGAYDAT.Value.ToString("dd/MM/yyyy")</td>
+                                                        <td>@data[i].THANHTIEN</td>
+                                                        <td><span class="status text-danger">&bull;</span> @data[i].LastestState</td>
+                                                        <td style="text-align: center;"><a href="@Url.Action("ViewOrderDetail", "MyOrder", new { iddh = data[i].IDDH })" title="View Details" data-toggle="tooltip"><i class="fa fa-newspaper"></i></a></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelOrderModalLabel">Xác nhận hủy đơn hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn hủy đơn hàng này không?
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-footer" style=" border-top: none;">
+                        <button type="button" class="btn btn-secondary" id="cancelOrderNo" data-dismiss="modal">Không</button>
+                        <button type="button" class="btn btn-danger" id="confirmCancel">Đồng ý</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<style>
+    .nav-link {
+        color: black;
+    }
+
+        .nav-link.active {
+            color: #fff !important;
+            background-color: #81c408;
+        }
+
+    .form-control[readonly] {
+        background-color: inherit;
+    }
+
+    .fied-info {
+        margin: 10px 0;
+    }
+
+    .widget-author {
+        margin-bottom: 58px;
+    }
+
+    .author-card {
+        position: relative;
+        padding-bottom: 48px;
+        background-color: #fff;
+        box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);
+    }
+
+        .author-card .author-card-cover {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+            .author-card .author-card-cover::after {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                content: '';
+                opacity: 0.5;
+            }
+
+            .author-card .author-card-cover > .btn {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                padding: 0 10px;
+                z-index: 1;
+            }
+
+        .author-card .author-card-profile {
+            display: table;
+            position: relative;
+            margin-top: -22px;
+            padding-right: 15px;
+            padding-bottom: 16px;
+            padding-left: 20px;
+            z-index: 5;
+        }
+
+            .author-card .author-card-profile .author-card-avatar, .author-card .author-card-profile .author-card-details {
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            .author-card .author-card-profile .author-card-avatar {
+                width: 85px;
+                border-radius: 50%;
+                box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
+                overflow: hidden;
+            }
+
+                .author-card .author-card-profile .author-card-avatar > img {
+                    display: block;
+                    width: 100%;
+                }
+
+            .author-card .author-card-profile .author-card-details {
+                padding-top: 20px;
+                padding-left: 15px;
+            }
+
+            .author-card .author-card-profile .author-card-name {
+                margin-bottom: 2px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .author-card .author-card-profile .author-card-position {
+                display: block;
+                color: #8c8c8c;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+        .author-card .author-card-info {
+            margin-bottom: 0;
+            padding: 0 25px;
+            font-size: 13px;
+        }
+
+        .author-card .author-card-social-bar-wrap {
+            position: absolute;
+            bottom: -18px;
+            left: 0;
+            width: 100%;
+        }
+
+            .author-card .author-card-social-bar-wrap .author-card-social-bar {
+                display: table;
+                margin: auto;
+                background-color: #fff;
+                box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .11);
+            }
+
+    .btn-style-1.btn-white {
+        background-color: #fff;
+    }
+
+    .list-group-item {
+        align-items: center;
+        display: flex !important;
+    }
+
+        .list-group-item i {
+            display: inline-block;
+            margin-top: -1px;
+            margin-right: 8px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+
+    .mr-1, .mx-1 {
+        margin-right: .25rem !important;
+    }
+
+    .list-group-item.active:not(.disabled) {
+        border-color: #e7e7e7;
+        background: #fff;
+        color: #ff5151;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .list-group-flush:last-child .list-group-item:last-child {
+        border-bottom: 0;
+    }
+
+    .list-group-flush .list-group-item {
+        border-right: 0 !important;
+        border-left: 0 !important;
+    }
+
+    .list-group-flush .list-group-item {
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+    }
+
+    .list-group-item.active {
+        z-index: 2;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .list-group-item:last-child {
+        margin-bottom: 0;
+        border-bottom-right-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+    }
+
+    a.list-group-item, .list-group-item-action {
+        color: #404040;
+        font-weight: 600;
+    }
+
+    .list-group-item {
+        padding-top: 16px;
+        padding-bottom: 16px;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+        border: 1px solid #e7e7e7 !important;
+        border-radius: 0 !important;
+        color: #404040;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: .75rem 1.25rem;
+        margin-bottom: -1px;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,0.125);
+    }
+
+        .list-group-item.active:not(.disabled)::before {
+            background-color: #ff5151;
+        }
+
+        .list-group-item::before {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background-color: transparent;
+            content: '';
+        }
+
+    .table-responsive {
+        margin: 30px 0;
+    }
+
+    .table-wrapper {
+        min-width: 1000px;
+        background: #fff;
+        padding: 20px 25px;
+        border-radius: 3px;
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+
+        .table-wrapper .btn {
+            float: right;
+            color: #333;
+            background-color: #fff;
+            border-radius: 3px;
+            border: none;
+            outline: none !important;
+            margin-left: 10px;
+        }
+
+            .table-wrapper .btn:hover {
+                color: #333;
+                background: #f2f2f2;
+            }
+
+            .table-wrapper .btn.btn-primary {
+                color: #fff;
+                background: #03A9F4;
+            }
+
+                .table-wrapper .btn.btn-primary:hover {
+                    background: #03a3e7;
+                }
+
+    .table-title .btn {
+        font-size: 13px;
+        border: none;
+    }
+
+        .table-title .btn i {
+            float: left;
+            font-size: 21px;
+            margin-right: 5px;
+        }
+
+        .table-title .btn span {
+            float: left;
+            margin-top: 2px;
+        }
+
+    .table-title {
+        color: #fff;
+        background: #4b5366;
+        padding: 16px 25px;
+        margin: -20px -25px 10px;
+        border-radius: 3px 3px 0 0;
+    }
+
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+
+    .show-entries select.form-control {
+        width: 60px;
+        margin: 0 5px;
+    }
+
+    .table-filter .filter-group {
+        float: right;
+        margin-left: 15px;
+    }
+
+    .table-filter input, .table-filter select {
+        height: 34px;
+        border-radius: 3px;
+        border-color: #ddd;
+        box-shadow: none;
+    }
+
+    .table-filter {
+        padding: 5px 0 15px;
+        border-bottom: 1px solid #e9e9e9;
+        margin-bottom: 5px;
+    }
+
+        .table-filter .btn {
+            height: 34px;
+        }
+
+        .table-filter label {
+            font-weight: normal;
+            margin-left: 10px;
+        }
+
+        .table-filter select, .table-filter input {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .table-filter input {
+            width: 200px;
+            display: inline-block;
+        }
+
+    .filter-group select.form-control {
+        width: 110px;
+    }
+
+    .filter-icon {
+        float: right;
+        margin-top: 7px;
+    }
+
+        .filter-icon i {
+            font-size: 18px;
+            opacity: 0.7;
+        }
+
+    table.table tr th, table.table tr td {
+        border-color: #e9e9e9;
+        padding: 12px 15px;
+        vertical-align: middle;
+    }
+
+        table.table tr th:first-child {
+            width: 60px;
+        }
+
+        table.table tr th:last-child {
+            width: 80px;
+        }
+
+    table.table-striped tbody tr:nth-of-type(odd) {
+        background-color: #fcfcfc;
+    }
+
+    table.table-striped.table-hover tbody tr:hover {
+        background: #f5f5f5;
+    }
+
+    table.table th i {
+        font-size: 13px;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+
+    table.table td a {
+        font-weight: bold;
+        color: #566787;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+        table.table td a:hover {
+            color: #2196F3;
+        }
+
+        table.table td a.view {
+            width: 30px;
+            height: 30px;
+            color: #2196F3;
+            border: 2px solid;
+            border-radius: 30px;
+            text-align: center;
+        }
+
+            table.table td a.view i {
+                font-size: 22px;
+                margin: 3px 1px 0px 0px;
+            }
+
+    table.table .avatar {
+        border-radius: 50%;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    .status {
+        font-size: 30px;
+        margin: 2px 2px 0 0;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 10px;
+    }
+
+    .text-success {
+        color: #10c469;
+    }
+
+    .text-info {
+        color: #62c9e8;
+    }
+
+    .text-warning {
+        color: #FFC107;
+    }
+
+    .text-danger {
+        color: #ff5b5b;
+    }
+
+    .pagination {
+        float: right;
+        margin: 0 0 5px;
+    }
+
+        .pagination li a {
+            border: none;
+            font-size: 13px;
+            min-width: 30px;
+            min-height: 30px;
+            color: #999;
+            margin: 0 2px;
+            line-height: 30px;
+            border-radius: 2px !important;
+            text-align: center;
+            padding: 0 6px;
+        }
+
+            .pagination li a:hover {
+                color: #666;
+            }
+
+        .pagination li.active a {
+            background: #03A9F4;
+        }
+
+            .pagination li.active a:hover {
+                background: #0397d6;
+            }
+
+        .pagination li.disabled i {
+            color: #ccc;
+        }
+
+        .pagination li i {
+            font-size: 16px;
+            padding-top: 6px
+        }
+
+    .hint-text {
+        float: left;
+        margin-top: 10px;
+        font-size: 13px;
+    }
+    .fa-newspaper {
+        font-size: 22px;
+    }
+</style>

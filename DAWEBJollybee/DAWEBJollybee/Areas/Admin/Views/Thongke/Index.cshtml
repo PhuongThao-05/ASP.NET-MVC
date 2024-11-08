@@ -1,0 +1,143 @@
+﻿
+@{
+    Page.Title = "Statistic";
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+
+<div class="section-header">
+    <h1>Thống kê</h1>
+</div>
+<div class="section-body">
+    <div>
+        <h4 style="margin-left:18px;">Thống kê doanh thu từng tháng trong năm</h4>
+        <form id="yearForm" method="post" action="/Admin/Thongke/Index" style=" align-items: center; gap: 10px; display: inline-flex;">
+            <label for="selectedYear" style="font-size: 16px; margin-left: 20px;">Chọn Năm:</label>
+            @Html.DropDownList("selectedYear", ViewBag.Years as SelectList, new { @class = "form-control", style = "width:150px;" })
+            <input type="submit" value="Thống kê" style="border-radius: 3px; border: solid 1px #66b3ff; background-color: #cce6ff; height: 44px;padding:0px 10px;" />
+        </form>
+        <canvas id="myChart" style="width:200px; height:50px;"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div style="margin-top: 20px;">
+        @{
+            List<DAWEBJollybee.Models.Metadata.TKProductCount> productCounts = (List<DAWEBJollybee.Models.Metadata.TKProductCount>)ViewBag.ProductCounts;
+            var groupedByMonth = productCounts.GroupBy(item => item.dh.NGAYDAT.Value.Month);
+            var distinctMonths = groupedByMonth.Select(group => group.Key).OrderBy(month => month).ToList();
+        }
+        <h4 style=" margin-left: 18px;">Số lượng sản phẩm bán được theo tháng trong năm @ViewBag.Selectedyear</h4>
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="example" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example_info" style="">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Hình ảnh sản phẩm</th>
+                            @foreach (var month in distinctMonths)
+                            {
+                                <th>Tháng @month</th>
+                            }
+                            <th>Tổng số lượng bán</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in productCounts.GroupBy(p => p.product.TENSP))
+                        {
+                            <tr>
+                                <td>@item.Key</td>
+                                <td>
+                                    <img src="@Html.DisplayFor(modelItem => item.First().product.HINHANH)" style="max-width: 80px; max-height: 80px;" />
+                                </td>
+                                @foreach (var month in distinctMonths)
+                                {
+                                    var quantity = item.Where(p => p.dh.NGAYDAT.Value.Month == month).Sum(p => p.Quantity);
+                                    <td>@quantity</td>
+                                }
+                                <td>
+                                    @item.Sum(p => p.Quantity)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h4 style="margin-left:18px;">Thống kê doanh thu 5 năm gần nhất</h4>
+        <canvas id="myChart1" style="width:200px; height:50px;"></canvas>
+    </div>
+
+    @if (Model != null)
+    {
+        <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const chartData = @Html.Raw(Json.Encode(Model));
+
+        const ctx1 = document.getElementById('myChart1').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartData.monthData.labels,
+                datasets: chartData.monthData.datasets
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: chartData.yearData.labels,
+                datasets: chartData.yearData.datasets.map((dataset, index) => ({
+                    ...dataset,
+                    backgroundColor: index % 2 === 0 ? 'rgba(255, 99, 132, 0.2)' : 'rgba(54, 162, 235, 0.2)',
+                    borderColor: index % 2 === 0 ? 'rgba(255, 99, 132, 1)' : 'rgba(54, 162, 235, 1)',
+                }))
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+    }
+</div>
+<style>
+    table.table-bordered th,
+    table.table-bordered td {
+        text-align: center;
+        border: 1px solid #d9d9d9 !important;
+    }
+
+    table.table-bordered {
+        border-collapse: collapse !important;
+    }
+
+    th {
+        background-color: #fff;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+</style>
+
+
+
+
+
+

@@ -1,0 +1,173 @@
+﻿@model DAWEBJollybee.Models.DONHANG
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Forms &rsaquo; Form Validation &mdash; Stisla</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/components.css">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
+</head>
+
+<body>
+    <div class="section-header">
+        <h1>Create order</h1>
+    </div>
+    <div class="section-body">
+        <div class="card">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="card-header" style="justify-content:space-between;">
+                    <h4>Thêm đơn hàng</h4>
+                    <div>
+                        <a href="/Admin/Donhang/Index" style="text-decoration: none; font-size: 16px;">Back to List <i class="fas fa-arrow-alt-circle-right" style="font-size: 16px;"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @*<div class="form-group">
+                        @Html.LabelFor(model => model.IDDH, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IDDH, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.IDDH, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IDKH, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.IDKH, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IDKH, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @* <div class="form-group">
+                        @Html.LabelFor(model => model.NGAYDAT, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NGAYDAT, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NGAYDAT, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IDPAYMENT, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.IDPAYMENT, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IDPAYMENT, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.TONGTIEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TONGTIEN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TONGTIEN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        @*<div class="form-group">
+                        @Html.LabelFor(model => model.PHISHIP, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PHISHIP, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PHISHIP, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.KHUYENMAI, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.KHUYENMAI, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.KHUYENMAI, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.THANHTIEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.THANHTIEN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.THANHTIEN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        @* <div class="form-group">
+                        @Html.LabelFor(model => model.LastestState, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LastestState, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastestState, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HOANTAT, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.HOANTAT, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.HOANTAT, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HUY, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.HUY, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.HUY, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <button class="btn btn-default reset-act" type="reset" style="width:130px;">Reset</button>
+                    <input type="submit" value="Create" style="width:130px;" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+                </div>
+                <style>
+                    .form-group {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .reset-act:hover {
+                        background-color: #d2d2e0 !important;
+                    }
+                </style>
+                <!-- General JS Scripts -->
+                <script src="~/Assets/Admin/dist/assets/modules/jquery.min.js"></script>
+                <script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+                <script src="~/Assets/Admin/dist/assets/modules/tooltip.js"></script>
+                <script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+                <script src="~/Assets/Admin/dist/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+                <script src="~/Assets/Admin/dist/assets/modules/moment.min.js"></script>
+                <script src="~/Assets/Admin/dist/assets/js/stisla.js"></script>
+
+                <!-- JS Libraies -->
+                <!-- Page Specific JS File -->
+                <!-- Template JS File -->
+                <script src="~/Assets/Admin/dist/assets/js/scripts.js"></script>
+                <script src="~/Assets/Admin/dist/assets/js/custom.js"></script>
+    </body>
+</html>

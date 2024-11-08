@@ -1,0 +1,395 @@
+﻿
+@{
+    Page.Title = "Home Page";
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-2">
+            <div class="card-stats">
+                <div class="card-stats-title">
+                    Order Statistics -
+                    <div class="dropdown d-inline">
+                        @using System.Globalization;
+                        @functions {
+                            public string GetMonthName(int monthNumber)
+                            {
+                                string[] months = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+                                return months[monthNumber - 1];
+                            }
+                        }
+                        <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">@GetMonthName((int)ViewBag.SelectedMonth)</a>
+                        <ul class="dropdown-menu dropdown-menu-sm">
+                            <li class="dropdown-title">Select Month</li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="1">January</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="2">February</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="3">March</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="4">April</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="5">May</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="6">June</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="7">July</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="8">August</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="9">September</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="10">October</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="11">November</a></li>
+                            <li><a href="#" class="dropdown-item selectmonth" data-month="12">December</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $(document).ready(function () {                     
+                        $(".selectmonth").click(function (e) {
+                            e.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a>
+
+                            var selectedMonth = $(this).data("month");                       
+                            $.ajax({
+                                url: "/Admin/Home/SelectedMonth",
+                                type: "POST",
+                                data: {
+                                    selectedmonth: selectedMonth
+                                },
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error("Đã xảy ra lỗi khi cập nhật tháng được chọn: " + error);
+                                }
+                            });
+                        });                       
+                    });                   
+                </script>
+                <div class="card-stats-items">
+                    <div class="card-stats-item">
+                        <div class="card-stats-item-count">@ViewBag.Pending</div>
+                        <div class="card-stats-item-label">Pending</div>
+                    </div>
+                    <div class="card-stats-item">
+                        <div class="card-stats-item-count">@ViewBag.Shipping</div>
+                        <div class="card-stats-item-label">Shipping</div>
+                    </div>
+                    <div class="card-stats-item">
+                        <div class="card-stats-item-count">@ViewBag.Completed</div>
+                        <div class="card-stats-item-label">Completed</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-icon shadow-primary bg-primary">
+                <i class="fas fa-archive"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Total Orders</h4>
+                </div>
+                <div class="card-body">
+                    @ViewBag.SumOrder
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-2">
+            <div class="card-chart">
+                <canvas id="balance-chart" height="80"></canvas>
+            </div>
+            <div class="card-icon shadow-primary bg-primary">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Total by @GetMonthName((int)ViewBag.SelectedMonth)</h4>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Totalorder == null)
+                    {
+                    <span>0 VNĐ</span>
+                    }
+                    else
+                    {
+                       <span> @ViewBag.Totalorder.ToString("#,####")VNĐ</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-2">
+            <div class="card-chart">
+                <canvas id="sales-chart" height="80"></canvas>
+            </div>
+            <div class="card-icon shadow-primary bg-primary">
+                <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Sales by @GetMonthName((int)ViewBag.SelectedMonth)</h4>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Sale == null)
+                    {
+                        <span>0</span>
+                    }
+                    else
+                    {
+                <span> @ViewBag.Sale</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Budget vs Sales</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="myChart" height="158"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card gradient-bottom">
+            <div class="card-header">
+                <h4>Top 5 Products</h4>
+                <div class="card-header-action dropdown">                  
+                </div>
+            </div>
+            <div class="card-body" id="top-5-scroll">
+                <ul class="list-unstyled list-unstyled-border">
+                    @foreach (var item in ViewBag.TopSP)
+                    {
+                        <li class="media">
+                            <img class="mr-3 rounded" width="55" src="@item.Product.HINHANH" alt="product">
+                            <div class="media-body">
+                                <div class="float-right"><div class="font-weight-600 text-muted text-small">@item.TotalQuantity Sales</div></div>
+                                <div class="media-title">@item.Product.TENSP</div>
+                                <div class="mt-1">
+                                    <div class="budget-price">
+                                        <div class="budget-price-square bg-primary" data-width="10%"></div>
+                                        <div class="budget-price-label">@item.Product.MOTA </div>
+                                    </div>
+                                    <div class="budget-price">
+                                        <div class="budget-price-square bg-danger" data-width="43%"></div>
+                                        <div class="budget-price-label">@item.Product.DONGIA.ToString("#,####") đ</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    </ul>
+            </div>
+            <div class="card-footer pt-3 d-flex justify-content-center">
+                <div class="budget-price justify-content-center">
+                    <div class="budget-price-square bg-primary" data-width="20"></div>
+                    <div class="budget-price-label">Description</div>
+                </div>
+                <div class="budget-price justify-content-center">
+                    <div class="budget-price-square bg-danger" data-width="20"></div>
+                    <div class="budget-price-label">Price</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Best Products</h4>
+            </div>
+            <div class="card-body">
+                <div class="owl-carousel owl-theme" id="products-carousel">
+                    @foreach(var item in ViewBag.TopSP)
+                            { 
+                    <div>
+                        <div class="product-item pb-3">
+                            <div class="product-image">
+                                <img alt="image" src="@item.Product.HINHANH" class="img-fluid">
+                            </div>
+                            <div class="product-details">
+                                <div class="product-name">@item.Product.TENSP</div>
+                                <div class="product-review">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="text-muted text-small">@item.TotalQuantity</div>
+                                <div class="product-cta">
+                                    <a href="#" class="btn btn-primary">@item.Product.LOAISP.TENLOAISP</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Top Countries</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="text-title mb-2">July</div>
+                        <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
+                            <li class="media">
+                                <img class="img-fluid mt-1 img-shadow" src="~/Assets/Admin/dist/assets/modules/flag-icon-css/flags/4x3/id.svg" alt="image" width="40">
+                                <div class="media-body ml-3">
+                                    <div class="media-title">Indonesia</div>
+                                    <div class="text-small text-muted">3,282 <i class="fas fa-caret-down text-danger"></i></div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="img-fluid mt-1 img-shadow" src="~/Assets/Admin/dist/assets/modules/flag-icon-css/flags/4x3/my.svg" alt="image" width="40">
+                                <div class="media-body ml-3">
+                                    <div class="media-title">Malaysia</div>
+                                    <div class="text-small text-muted">2,976 <i class="fas fa-caret-down text-danger"></i></div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="img-fluid mt-1 img-shadow" src="~/Assets/Admin/dist/assets/modules/flag-icon-css/flags/4x3/us.svg" alt="image" width="40">
+                                <div class="media-body ml-3">
+                                    <div class="media-title">United States</div>
+                                    <div class="text-small text-muted">1,576 <i class="fas fa-caret-up text-success"></i></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 mt-sm-0 mt-4">
+                        <div class="text-title mb-2">August</div>
+                        <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
+                            <li class="media">
+                                <img class="img-fluid mt-1 img-shadow" src="~/Assets/Admin/dist/assets/modules/flag-icon-css/flags/4x3/id.svg" alt="image" width="40">
+                                <div class="media-body ml-3">
+                                    <div class="media-title">Indonesia</div>
+                                    <div class="text-small text-muted">3,486 <i class="fas fa-caret-up text-success"></i></div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="img-fluid mt-1 img-shadow" src="~/Assets/Admin/dist/assets/modules/flag-icon-css/flags/4x3/ps.svg" alt="image" width="40">
+                                <div class="media-body ml-3">
+                                    <div class="media-title">Palestine</div>
+                                    <div class="text-small text-muted">3,182 <i class="fas fa-caret-up text-success"></i></div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="img-fluid mt-1 img-shadow" src="~/Assets/Admin/dist/assets/modules/flag-icon-css/flags/4x3/de.svg" alt="image" width="40">
+                                <div class="media-body ml-3">
+                                    <div class="media-title">Germany</div>
+                                    <div class="text-small text-muted">2,317 <i class="fas fa-caret-down text-danger"></i></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Orders</h4>
+                <div class="card-header-action">
+                    <a href="/Admin/Donhang/Index" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive table-invoice">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>State</th>
+                            <th>Date</th>
+                            <th>Check out</th>
+                        </tr>
+                        
+                            @foreach (var item in ViewBag.Order)
+                                    {
+                    <tr>
+                        <td>@item.IDDH</td>
+                        <td class="font-weight-600">@item.KHACHHANG.HOTEN</td>
+                        @if (item.LastestState == "Đã giao hàng thành công")
+                        {
+                            <td style="text-align:center;"><div class="badge badge-success">@item.LastestState</div></td>
+                        }
+                        else if(item.LastestState == "Hủy đơn hàng")
+                                {
+                            <td style="text-align:center;"><div class="badge badge-danger">@item.LastestState</div></td>
+                        }
+                        else
+                                {
+                            <td style="text-align:center;"><div class="badge badge-warning">@item.LastestState</div></td>
+                        }
+                        <td>@item.NGAYDAT.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @item.THANHTIEN.ToString("#,####") đ
+                        </td>
+                    </tr>
+                        }            
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-hero">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="far fa-question-circle"></i>
+                </div>
+                <h4>14</h4>
+                <div class="card-description">Customers need help</div>
+            </div>
+            <div class="card-body p-0">
+                <div class="tickets-list">
+                    <a href="#" class="ticket-item">
+                        <div class="ticket-title">
+                            <h4>My order hasn't arrived yet</h4>
+                        </div>
+                        <div class="ticket-info">
+                            <div>Laila Tazkiah</div>
+                            <div class="bullet"></div>
+                            <div class="text-primary">1 min ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="ticket-item">
+                        <div class="ticket-title">
+                            <h4>Please cancel my order</h4>
+                        </div>
+                        <div class="ticket-info">
+                            <div>Rizal Fakhri</div>
+                            <div class="bullet"></div>
+                            <div>2 hours ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="ticket-item">
+                        <div class="ticket-title">
+                            <h4>Do you see my order?</h4>
+                        </div>
+                        <div class="ticket-info">
+                            <div>Syahdan Ubaidillah</div>
+                            <div class="bullet"></div>
+                            <div>6 hours ago</div>
+                        </div>
+                    </a>
+                    <a href="features-tickets.html" class="ticket-item ticket-more">
+                        View All <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

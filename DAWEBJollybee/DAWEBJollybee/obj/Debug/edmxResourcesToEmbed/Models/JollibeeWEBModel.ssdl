@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JOLLYBEEWEBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CHITIETDONHANG">
+    <Key>
+      <PropertyRef Name="IDDH" />
+      <PropertyRef Name="IDSP" />
+    </Key>
+    <Property Name="IDDH" Type="int" Nullable="false" />
+    <Property Name="IDSP" Type="int" Nullable="false" />
+    <Property Name="SOLUONG" Type="int" />
+    <Property Name="GIATIEN" Type="float" />
+  </EntityType>
+  <EntityType Name="DONHANG">
+    <Key>
+      <PropertyRef Name="IDDH" />
+    </Key>
+    <Property Name="IDDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDKH" Type="int" />
+    <Property Name="NGAYDAT" Type="date" />
+    <Property Name="IDPAYMENT" Type="int" />
+    <Property Name="TONGTIEN" Type="float" />
+    <Property Name="PHISHIP" Type="float" />
+    <Property Name="KHUYENMAI" Type="float" />
+    <Property Name="THANHTIEN" Type="float" />
+    <Property Name="LastestState" Type="nvarchar" MaxLength="50" />
+    <Property Name="HOANTAT" Type="bit" />
+    <Property Name="HUY" Type="bit" />
+    <Property Name="DeleteOrder" Type="bit" />
+    <Property Name="IDCoupon" Type="int" />
+  </EntityType>
+  <EntityType Name="HINHANHSP">
+    <Key>
+      <PropertyRef Name="IDHA" />
+    </Key>
+    <Property Name="IDHA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDSP" Type="int" />
+    <Property Name="IMAGE" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="KHACHHANG">
+    <Key>
+      <PropertyRef Name="IDKH" />
+    </Key>
+    <Property Name="IDKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERNAME" Type="nvarchar" MaxLength="20" />
+    <Property Name="HOTEN" Type="nvarchar" MaxLength="50" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+    <Property Name="SDT" Type="nvarchar" MaxLength="50" />
+    <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LOAISP">
+    <Key>
+      <PropertyRef Name="IDLSP" />
+    </Key>
+    <Property Name="IDLSP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TENLOAISP" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="NGUOIDUNG">
+    <Key>
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="USERNAME" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="PASSWORD" Type="nvarchar" MaxLength="128" />
+    <Property Name="IDENTIFY" Type="bit" />
+  </EntityType>
+  <EntityType Name="PAYMENTMETHOD">
+    <Key>
+      <PropertyRef Name="IDPAYMENT" />
+    </Key>
+    <Property Name="IDPAYMENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="METHODNAME" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="QLVOUCHER">
+    <Key>
+      <PropertyRef Name="IDCoupon" />
+      <PropertyRef Name="IDKH" />
+    </Key>
+    <Property Name="IDCoupon" Type="int" Nullable="false" />
+    <Property Name="IDKH" Type="int" Nullable="false" />
+    <Property Name="StateUse" Type="bit" />
+    <Property Name="NGAYTHEM" Type="datetime" />
+    <Property Name="NGAYSD" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SANPHAM">
+    <Key>
+      <PropertyRef Name="IDSP" />
+    </Key>
+    <Property Name="IDSP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDLSP" Type="int" />
+    <Property Name="HINHANH" Type="nvarchar" MaxLength="200" />
+    <Property Name="TENSP" Type="nvarchar" MaxLength="50" />
+    <Property Name="MOTA" Type="nvarchar" MaxLength="100" />
+    <Property Name="DONGIA" Type="float" />
+    <Property Name="StateProduct" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TRANGTHAIDH">
+    <Key>
+      <PropertyRef Name="IDSTATE" />
+    </Key>
+    <Property Name="IDSTATE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDDH" Type="int" />
+    <Property Name="CurrentState" Type="nvarchar" MaxLength="50" />
+    <Property Name="StateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VOUCHER">
+    <Key>
+      <PropertyRef Name="IDCoupon" />
+    </Key>
+    <Property Name="IDCoupon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TENVOUCHER" Type="nvarchar" MaxLength="50" />
+    <Property Name="GIATRI" Type="float" />
+    <Property Name="HSD" Type="datetime" />
+    <Property Name="StateCoupon" Type="bit" />
+  </EntityType>
+  <Association Name="FK__CHITIETDON__IDDH__440B1D61">
+    <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="1" />
+    <End Role="CHITIETDONHANG" Type="Self.CHITIETDONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONHANG">
+        <PropertyRef Name="IDDH" />
+      </Principal>
+      <Dependent Role="CHITIETDONHANG">
+        <PropertyRef Name="IDDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CHITIETDON__IDSP__44FF419A">
+    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+    <End Role="CHITIETDONHANG" Type="Self.CHITIETDONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SANPHAM">
+        <PropertyRef Name="IDSP" />
+      </Principal>
+      <Dependent Role="CHITIETDONHANG">
+        <PropertyRef Name="IDSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DONHANG__IDCoupo__412EB0B6">
+    <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="0..1" />
+    <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VOUCHER">
+        <PropertyRef Name="IDCoupon" />
+      </Principal>
+      <Dependent Role="DONHANG">
+        <PropertyRef Name="IDCoupon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DONHANG__IDKH__3C69FB99">
+    <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+    <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="IDKH" />
+      </Principal>
+      <Dependent Role="DONHANG">
+        <PropertyRef Name="IDKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DONHANG__IDPAYME__3D5E1FD2">
+    <End Role="PAYMENTMETHOD" Type="Self.PAYMENTMETHOD" Multiplicity="0..1" />
+    <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAYMENTMETHOD">
+        <PropertyRef Name="IDPAYMENT" />
+      </Principal>
+      <Dependent Role="DONHANG">
+        <PropertyRef Name="IDPAYMENT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HINHANHSP__IDSP__37A5467C">
+    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1" />
+    <End Role="HINHANHSP" Type="Self.HINHANHSP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SANPHAM">
+        <PropertyRef Name="IDSP" />
+      </Principal>
+      <Dependent Role="HINHANHSP">
+        <PropertyRef Name="IDSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KHACHHANG__USERN__286302EC">
+    <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="0..1" />
+    <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NGUOIDUNG">
+        <PropertyRef Name="USERNAME" />
+      </Principal>
+      <Dependent Role="KHACHHANG">
+        <PropertyRef Name="USERNAME" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__QLVOUCHER__IDCou__2E1BDC42">
+    <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="1" />
+    <End Role="QLVOUCHER" Type="Self.QLVOUCHER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VOUCHER">
+        <PropertyRef Name="IDCoupon" />
+      </Principal>
+      <Dependent Role="QLVOUCHER">
+        <PropertyRef Name="IDCoupon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__QLVOUCHER__IDKH__2F10007B">
+    <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
+    <End Role="QLVOUCHER" Type="Self.QLVOUCHER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="IDKH" />
+      </Principal>
+      <Dependent Role="QLVOUCHER">
+        <PropertyRef Name="IDKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SANPHAM__IDLSP__33D4B598">
+    <End Role="LOAISP" Type="Self.LOAISP" Multiplicity="0..1" />
+    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAISP">
+        <PropertyRef Name="IDLSP" />
+      </Principal>
+      <Dependent Role="SANPHAM">
+        <PropertyRef Name="IDLSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TRANGTHAID__IDDH__47DBAE45">
+    <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="0..1" />
+    <End Role="TRANGTHAIDH" Type="Self.TRANGTHAIDH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONHANG">
+        <PropertyRef Name="IDDH" />
+      </Principal>
+      <Dependent Role="TRANGTHAIDH">
+        <PropertyRef Name="IDDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JOLLYBEEWEBModelStoreContainer">
+    <EntitySet Name="CHITIETDONHANG" EntityType="Self.CHITIETDONHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DONHANG" EntityType="Self.DONHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HINHANHSP" EntityType="Self.HINHANHSP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOAISP" EntityType="Self.LOAISP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NGUOIDUNG" EntityType="Self.NGUOIDUNG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAYMENTMETHOD" EntityType="Self.PAYMENTMETHOD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QLVOUCHER" EntityType="Self.QLVOUCHER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRANGTHAIDH" EntityType="Self.TRANGTHAIDH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VOUCHER" EntityType="Self.VOUCHER" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CHITIETDON__IDDH__440B1D61" Association="Self.FK__CHITIETDON__IDDH__440B1D61">
+      <End Role="DONHANG" EntitySet="DONHANG" />
+      <End Role="CHITIETDONHANG" EntitySet="CHITIETDONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CHITIETDON__IDSP__44FF419A" Association="Self.FK__CHITIETDON__IDSP__44FF419A">
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+      <End Role="CHITIETDONHANG" EntitySet="CHITIETDONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DONHANG__IDCoupo__412EB0B6" Association="Self.FK__DONHANG__IDCoupo__412EB0B6">
+      <End Role="VOUCHER" EntitySet="VOUCHER" />
+      <End Role="DONHANG" EntitySet="DONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DONHANG__IDKH__3C69FB99" Association="Self.FK__DONHANG__IDKH__3C69FB99">
+      <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+      <End Role="DONHANG" EntitySet="DONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DONHANG__IDPAYME__3D5E1FD2" Association="Self.FK__DONHANG__IDPAYME__3D5E1FD2">
+      <End Role="PAYMENTMETHOD" EntitySet="PAYMENTMETHOD" />
+      <End Role="DONHANG" EntitySet="DONHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HINHANHSP__IDSP__37A5467C" Association="Self.FK__HINHANHSP__IDSP__37A5467C">
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+      <End Role="HINHANHSP" EntitySet="HINHANHSP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KHACHHANG__USERN__286302EC" Association="Self.FK__KHACHHANG__USERN__286302EC">
+      <End Role="NGUOIDUNG" EntitySet="NGUOIDUNG" />
+      <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__QLVOUCHER__IDCou__2E1BDC42" Association="Self.FK__QLVOUCHER__IDCou__2E1BDC42">
+      <End Role="VOUCHER" EntitySet="VOUCHER" />
+      <End Role="QLVOUCHER" EntitySet="QLVOUCHER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__QLVOUCHER__IDKH__2F10007B" Association="Self.FK__QLVOUCHER__IDKH__2F10007B">
+      <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+      <End Role="QLVOUCHER" EntitySet="QLVOUCHER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SANPHAM__IDLSP__33D4B598" Association="Self.FK__SANPHAM__IDLSP__33D4B598">
+      <End Role="LOAISP" EntitySet="LOAISP" />
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TRANGTHAID__IDDH__47DBAE45" Association="Self.FK__TRANGTHAID__IDDH__47DBAE45">
+      <End Role="DONHANG" EntitySet="DONHANG" />
+      <End Role="TRANGTHAIDH" EntitySet="TRANGTHAIDH" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

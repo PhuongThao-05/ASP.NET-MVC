@@ -1,0 +1,230 @@
+﻿@model DAWEBJollybee.Models.VOUCHER
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Forms &rsaquo; Form Validation &mdash; Stisla</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/components.css">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
+</head>
+
+<body>
+    <div class="section-header">
+        <h1>Create Voucher</h1>
+    </div>
+    <div class="section-body">
+        <div class="card">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="card-header" style="justify-content:space-between;">
+                    <h4>Thêm phiếu khuyến mãi</h4>
+                    <div>
+                        <a href="/Admin/KM/Index" style="text-decoration: none; font-size: 16px;">Back to List <i class="fas fa-arrow-alt-circle-right" style="font-size: 16px;"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TENVOUCHER, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TENVOUCHER, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TENVOUCHER, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Loại ưu đãi</label>
+                            <div class="col-md-10">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="discountType" id="discountType1" value="discount">
+                                    <label class="form-check-label" for="discountType1">Giảm giá</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="discountType" id="discountType2" value="freeship">
+                                    <label class="form-check-label" for="discountType2">Freeship</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="discountValue" style="display: none;">
+                            @Html.LabelFor(model => model.GIATRI, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" id="decrease">-</button>
+                                    </div>
+                                    @Html.EditorFor(model => model.GIATRI, new { htmlAttributes = new { @class = "form-control text-center", @min = "0.05", @max = "1" } })
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="increase">+</button>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.GIATRI, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group" id="freeshipValue" style="display: none;">
+                            @Html.LabelFor(model => model.GIATRI, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.GIATRI, new { htmlAttributes = new { @class = "form-control text-center", @min = "1000", type = "number", @step = "1000", id = "freeshipInput" } })
+                                </div>
+                            </div>
+                        </div>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('input[type=radio][name=discountType]').change(function () {
+                                    if (this.value === 'discount') {
+                                        $('#discountValue').show();
+                                        $('#freeshipValue').hide();
+                                        var newValue = '0.05';
+                                        newValue = newValue.replace('.', ',');
+                                        $('#GIATRI').val(newValue);// Gán giá trị khi chọn Giảm giá
+                                    } else if (this.value === 'freeship') {
+                                        $('#discountValue').hide();
+                                        $('#freeshipValue').show();
+                                        $('#freeshipInput').val('1000'); // Gán giá trị khi chọn Freeship
+                                    }
+                                });
+
+                                // Hàm chuyển đổi giữa các định dạng dấu thập phân
+                                function formatDecimal(value) {
+                                    return value.toString().replace(",", ".");
+                                }
+
+                                // Xử lý sự kiện khi nhấn nút tăng giảm giá trị
+                                $("#increase").click(function () {
+                                    var currentValue = parseFloat(formatDecimal($("#GIATRI").val()));
+                                    if (currentValue < 1) {
+                                        var newValue = (currentValue + 0.01).toFixed(2);
+                                        if (newValue <= 1) {
+                                            $("#GIATRI").val(newValue.toString().replace(".", ","));
+                                        } else {
+                                            $("#GIATRI").val("1,0");
+                                        }
+                                    }
+                                });
+
+                                $("#decrease").click(function () {
+                                    var currentValue = parseFloat(formatDecimal($("#GIATRI").val()));
+                                    if (currentValue > 0.05) {
+                                        var newValue = (currentValue - 0.01).toFixed(2);
+                                        if (newValue >= 0.05) {
+                                            $("#GIATRI").val(newValue.toString().replace(".", ","));
+                                        } else {
+                                            $("#GIATRI").val("0,05");
+                                        }
+                                    }
+                                });
+                            });
+                            function resetcreate() {
+                                $('#discountValue').hide();
+                                $('#freeshipValue').hide();
+                            }
+                            $(document).ready(function () {
+                                $('form').submit(function () {
+                                    if ($('input[name=discountType]:checked').val() === 'freeship') {
+                                        var freeshipValue = $('#freeshipInput').val();
+                                        $('#GIATRI').val(parseFloat(freeshipValue));
+                                    }
+                                });
+                            });
+                        </script>
+                        <style>
+                            .input-group-prepend,
+                            .input-group-append {
+                                flex: 0 0 auto;
+                            }
+
+                                .input-group-prepend button,
+                                .input-group-append button {
+                                    position: relative;
+                                    z-index: 2;
+                                }
+
+                                    .input-group-prepend button:focus,
+                                    .input-group-prepend button:active,
+                                    .input-group-append button:focus,
+                                    .input-group-append button:active {
+                                        z-index: 3;
+                                    }
+
+                            .btn-outline-secondary {
+                                border-color: #ced4da !important;
+                            }
+
+                            .control-label {
+                                font-size: 14px;
+                                padding-top: 12px;
+                                flex: none;
+                                max-width: max-content;
+                            }
+                        </style>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HSD, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.HSD, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local" })
+                            @Html.ValidationMessageFor(model => model.HSD, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <button class="btn btn-default reset-act" type="reset" style="width:130px;" onclick="resetcreate();">Reset</button>
+                    <input type="submit" value="Create" style="width:130px;" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+        .control-label {
+            max-width: 190px;
+        }
+        .reset-act:hover {
+            background-color: #d2d2e0 !important;
+        }
+    </style>
+    <!--General JS Scripts-->
+     <script src="~/Assets/Admin/dist/assets/modules/jquery.min.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/tooltip.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="~/Assets/Admin/dist/assets/modules/moment.min.js"></script>
+    <script src="~/Assets/Admin/dist/assets/js/stisla.js"></script>
+
+    <!-- JS Libraies -->
+    <!-- Page Specific JS File -->
+    <!-- Template JS File -->
+    <script src="~/Assets/Admin/dist/assets/js/scripts.js"></script>
+    <script src="~/Assets/Admin/dist/assets/js/custom.js"></script>
+</body>
+</html>

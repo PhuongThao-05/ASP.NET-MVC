@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/User/Views/Shared/Home_Layout.cshtml";
+}
+
+<!-- Single Page Header start -->
+<div class="container-fluid py-5 mt-5">
+        <div class="mt-3">
+            <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active rounded">
+                        <img src="~/Assets/User/img/website.jpg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+
+                    </div>
+                    <div class="carousel-item rounded">
+                        <img src="~/Assets/User/img/website1.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+
+                    </div>
+                    <div class="carousel-item rounded">
+                        <img src="~/Assets/User/img/website2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+    <div class="container-fluid py-5" style="margin-top: 1rem; margin-bottom: 1rem;">
+        <div class="row">
+            @foreach (var item in ViewBag.vouchers)
+            {
+                <div class="col-sm-6">
+                    <div class="coupon rounded mb-3 d-flex justify-content-between">
+                        <div class="kiri p-3">
+                            <div class="icon-container ">
+                                <div class="icon-container_box">
+                                    <img src="~/Assets/Admin/dist/assets/img/jollibee.png" width="85" class="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tengah py-3 d-flex w-100 justify-content-start">
+                            <div style=" padding-left: 10px;">
+                                <span class="badge badge-success">Valid</span>
+                                <h3 class="lead">@item.TENVOUCHER </h3>
+                                @{
+                                    if (item.GIATRI >= 1000)
+                                    {
+                                        <p class="text-muted mb-0">Valid to apply: @string.Format("{0:#,###}", item.GIATRI) đ</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted mb-0">Valid to apply: @(item.GIATRI*100) %</p>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="kanan">
+                            <div class="info m-3 d-flex align-items-center">
+                                <div class="w-100" style=" gap: 10px; display: flex; flex-direction: column; align-items: center;">
+                                    <div class="block">
+                                        <span class="time font-weight-light">
+                                            <span style="font-size: 13px;font-weight:600;">Expired: @item.HSD</span>
+                                        </span>
+                                    </div>
+                                    <button data-idvoucher="@item.IDCoupon" class="btn btn-sm btn-outline-danger btn-block Addvoucherbtn">
+                                        Add voucher
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <style>
+            .coupon {
+                background-color: #ffe6cc;
+            }
+
+                .coupon .kanan {
+                    border-left: 1px dashed #808080;
+                    width: 65% !important;
+                }
+
+                .coupon .time {
+                    font-size: 14px;
+                }
+
+            .badge {
+                background-color: #47d147;
+                padding: 8px;
+                margin-bottom: 5px;
+            }
+
+            .btn-block {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .kiri {
+                border-right: 1px dashed #808080;
+            }
+
+            .Addvoucherbtn.added {
+                background-color: none;
+                border: 1px solid #0099ff;
+                color: #0099ff; /* Màu chữ của nút sau khi đã thêm */
+            }
+
+                .Addvoucherbtn.added:hover {
+                    background-color: none !important;
+                    border: 1px solid #0099ff;
+                    color: #0099ff; /* Màu chữ của nút sau khi đã thêm */
+                }
+        </style>
+
+    </div>
+</div>
+
+<script src="~/Assets/User/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+   $(document).ready(function () {
+    // Hàm kiểm tra trạng thái của từng nút
+    function checkVoucherStatus(button, addidvoucher) {
+        $.ajax({
+            url: '@Url.Action("CheckVoucherExists", "AddVoucher")',
+            type: 'GET',
+            data: { idvoucher: addidvoucher },
+            success: function (result) {
+                if (result.exists) {
+                    button.text('Đã thêm').addClass('added').prop('disabled', true);
+                    console.log("1");
+                } else {
+                    localStorage.removeItem('addedVoucher_' + addidvoucher);
+                    console.log("2");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Đã xảy ra lỗi khi gửi yêu cầu AJAX");
+            },
+        });
+       }
+
+    // Kiểm tra trạng thái của từng nút
+    $('.Addvoucherbtn').each(function () {
+        var button = $(this);
+        var addidvoucher = button.data('idvoucher');
+        checkVoucherStatus(button, addidvoucher);
+    });
+
+    // Xử lý sự kiện khi nhấn nút "Add voucher"
+    $('.Addvoucherbtn').click(function (e) {
+        e.preventDefault();
+        var button = $(this);
+        var addidvoucher = button.data('idvoucher');
+        $.ajax({
+            url: '@Url.Action("Addvoucher", "AddVoucher")',
+            type: 'POST',
+            data: { idvoucher: addidvoucher },
+            success: function (result) {
+                if (result.success) {
+                    button.text('Đã thêm').addClass('added').prop('disabled', true);
+                    localStorage.setItem('addedVoucher_' + addidvoucher, true);
+                } else {
+                    console.log("chưa đăng nhập");
+                    alert("Bạn cần đăng nhập tài khoản!");
+                    window.location.href = '/User/LoginUI/Index';
+                    console.error(result.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Đã xảy ra lỗi khi gửi yêu cầu AJAX");
+            }
+        });
+    });
+});
+</script>
+
+

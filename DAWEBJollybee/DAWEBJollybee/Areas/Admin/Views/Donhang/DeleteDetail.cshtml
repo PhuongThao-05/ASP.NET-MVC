@@ -1,0 +1,121 @@
+﻿@model DAWEBJollybee.Models.CHITIETDONHANG
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/prism/prism.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/components.css">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+
+</head>
+<body>
+    <div class="modal-dialog m-0" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-family: sans-serif;">Xóa chi tiết đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <p style="font-weight: 600;margin-bottom: 5px;color: red;padding-top: 10px;padding-left: 25px;font-size: 16px;">Bạn có muốn xóa không?</p>
+            <div class="modal-body" style="padding-top: 10px; padding-bottom: 10px; justify-content: space-around; flex-direction: row; display: flex;">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IDDH):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IDDH)
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SANPHAM.TENSP):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SANPHAM.TENSP)
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SANPHAM.DONGIA):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SANPHAM.DONGIA) đ
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SOLUONG):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SOLUONG)
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.GIATIEN):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.GIATIEN) đ
+                        </dd>
+                    </dl>
+                </div>
+                <div>
+                    <dl class="dl-horizontal" style="flex-direction: column; align-items: center;">
+                        <dt style="width:max-content;">
+                            @Html.DisplayNameFor(model => model.SANPHAM.HINHANH)
+                        </dt>
+
+                        <dd>
+                            <img id="preview" src="@Model.SANPHAM.HINHANH" style="max-width: 160px; max-height: 160px; margin-bottom: 15px;margin-top: 12px; display: block;" />
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            @using (Html.BeginForm("DeleteDetail", "Donhang", FormMethod.Post, new { id = "deleteForm" }))
+            {
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button onclick="saveFormData()" class="btn btn-primary btn-del" style="background-color: #fc544b; border: solid 1px #fc544b; box-shadow: 0 2px 6px #fd9b96; ">Delete</button>
+                </div>
+            }
+            <style>
+                .btn-primary.btn-del:active, .btn-primary.btn-del:focus, .btn-primary.btn-del:focus:active, .btn-primary.btn-del:hover {
+                    background-color: #ff3333 !important;
+                    box-shadow: 0 2px 6px #ff8080 !important;
+                }
+
+                dl {
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: 10px;
+                    gap: 10px;
+                    justify-content: space-between;
+                }
+            </style>
+        </div>
+    </div>
+</body>
+</html>

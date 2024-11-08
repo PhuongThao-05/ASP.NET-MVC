@@ -1,0 +1,250 @@
+﻿@model DAWEBJollybee.Models.DONHANG
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/User/Views/Shared/Home_Layout.cshtml";
+}
+
+
+<!-- Checkout Page Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <h1 class="mb-4">Billing details</h1>
+        @using (Html.BeginForm("Create", "Checkout", FormMethod.Post, new { id = "orderForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row g-5">
+                <div class="col-md-12 col-lg-6 col-xl-7">
+                    @{ List<DAWEBJollybee.Models.KHACHHANG> kh = (List<DAWEBJollybee.Models.KHACHHANG>)ViewBag.KH;
+                        for (int i = 0; i < kh.Count; i++)
+                        {
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3" style="color: red;">Username<sup>*</sup></label>
+                                        @Html.TextBoxFor(m => kh[i].USERNAME, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3" style="color: red;">FullName<sup>*</sup></label>
+                                        @Html.TextBoxFor(m => kh[i].HOTEN, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3" style="color: red;">Phone Number<sup>*</sup></label>
+                                        @Html.TextBoxFor(m => kh[i].SDT, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3" style="color: red;">Address<sup>*</sup></label>
+                                        @Html.TextBoxFor(m => kh[i].DIACHI, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <label class="form-label" style="color: red;margin-top:20px;">Phương thức thanh toán<sup>*</sup></label>
+                    <span id="paymentMethodError" class="error-message"> <i class="fas fa-exclamation-circle" style="color:white;"></i> Vui lòng chọn phương thức thanh toán</span>
+                    <style>
+                        .error-message {
+                            margin-left: 240px;
+                            font-size: 14px;
+                            color: white;
+                            border-radius: 5px;
+                            border: 1px solid #ffb3b3;
+                            background-color: #ffcccc;
+                            padding: 5px 10px;
+                            margin-top: 5px;
+                            display: none;
+                        }
+                    </style>
+                    @foreach (var item in ViewBag.PaymentMethods)
+                    {
+                        <div class="row g-4 text-center align-items-center justify-content-center border-bottom" style="padding:17px 0;">
+                            <div class="col-12">
+                                <div class="form-check text-start my-3">
+                                    <input type="radio" class="form-check-input bg-primary border-0" name="selectedPaymentMethod" id="@("paymentMethod_" + item.IDPAYMENT)" value="@item.IDPAYMENT">
+                                    <label class="form-check-label" for="@("paymentMethod_" + item.IDPAYMENT)">@item.METHODNAME</label>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-5">
+                    <div class="">
+                        <table class="table" style="table-layout: fixed; width: 100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 25%">Products</th>
+                                    <th scope="col" style="width: 25%">Name</th>
+                                    <th scope="col" style="width: 25%">Price</th>
+                                    <th scope="col" style="width: 25%">Quantity</th>
+                                    <th scope="col" style="width: 25%">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.Cart)
+                                {
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="d-flex align-items-center mt-2">
+                                                <img src="@item.Product.HINHANH" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
+                                            </div>
+                                        </th>
+                                        <td class="py-5">@item.Product.TENSP</td>
+                                        <td class="py-5" style="text-align:center;">@item.Product.DONGIA.ToString("#,####") đ</td>
+                                        <td class="py-5" style="text-align:center;">@item.Quantity</td>
+                                        <td class="py-5" style="text-align:center;">@item.Amount.ToString("#,####") đ</td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <th scope="row">
+                                    </th>
+
+                                    <td class="py-2">
+                                        <p class="mb-0 text-dark py-2">Subtotal</p>
+                                    </td>
+                                    <td class="py-2"></td>
+                                    <td class="py-2"></td>
+                                    <td class="py-2">
+                                        <div class="py-2 ">
+                                            <p class="mb-0 text-dark">@Model.TONGTIEN.Value.ToString("#,####") đ</p>
+                                        </div>
+                                    </td>
+                                    <td class="py-2"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                    </th>
+                                    <td class="py-2">
+                                        <p class="mb-0 text-dark py-2">Shipping</p>
+                                    </td>
+                                    <td class="py-2"></td>
+                                    <td class="py-2"></td>
+                                    <td class="py-2">
+                                        <div class="py-2 ">
+                                            <p class="mb-0 text-dark">@Model.PHISHIP.Value.ToString("#,####") đ</p>
+                                        </div>
+                                    </td>
+                                    <td class="py-2"></td>
+                                </tr>
+                                <tr style="display: inline-flex; align-items: center;">
+                                   <td style=" padding-left: 5.7rem; padding-top: 2.5rem; padding-bottom: 2.4rem;">
+                                   </td>
+                                    <td>
+                                        <p class="mb-0 text-dark" style="padding-top: 1.2rem !important; padding-bottom: 1.2rem !important;">Voucher</p>
+                                    </td>
+                                    <td class="py-2">
+                                        @Html.DropDownListFor(model => model.IDCoupon, (IEnumerable<SelectListItem>)ViewData["voucher"], "Chọn voucher", new { @class = "form-control other-fields rounded py-2 custom-dropdown", style = "width: 300px; text-align: center; margin: 10px 10px; border: 1px solid #dee2e6 !important;", id = "voucher-apply" })
+                                        @Html.ValidationMessageFor(model => model.IDCoupon, "", new { @class = "text-danger" })
+                                    </td>
+                                    <!--<td>-->
+                                    @* <button id="coupon-btn" class="btn border-secondary rounded-pill px-5 py-1 text-primary" style=" margin: 2px 0;" type="button">
+            Apply Coupon
+        </button>*@
+                                    <!--</td>-->
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                    </th>
+                                    <td class="py-2">
+                                        <p class="mb-0 text-dark py-2">Discount</p>
+                                    </td>
+                                    <td class="py-2"></td>
+                                    <td class="py-2"></td>
+                                    <td class="py-2">
+                                        <div class="py-2">
+                                            <p class="mb-0" style="color:red;"><span id="discount">0</span> đ</p>
+                                        </div>
+                                    </td>
+                                    <td class="py-2"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                    </th>
+                                    <td class="py-2">
+                                        <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
+                                    </td>
+                                    <td class="py-2"></td>
+                                    <td class="py-2"></td>
+                                    <td class="py-2">
+                                        <div class="py-2">
+                                            <p class="mb-0" style="color:red;"><span id="thanhtien">@Model.THANHTIEN.Value.ToString("#,####")</span> đ</p>
+                                        </div>
+                                    </td>
+                                    <td class="py-2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <script>
+$(document).ready(function () {
+    $("#voucher-apply").change(function () {
+        var voucherId = $("#voucher-apply").val();
+        $.ajax({
+            url: '@Url.Action("GetNewTotal", "Checkout")',
+            type: 'GET',
+            dataType: 'json',
+            data: { voucherId: voucherId },
+            success: function (response) {
+                // Lấy giá trị newTotal và discount từ đối tượng JSON
+                var newTotal = response.NewTotal;
+                var discount = response.Discount;
+
+                // Cập nhật giá trị THANHTIEN và giá trị khuyến mãi trên giao diện
+                $("#thanhtien").text(newTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                $("#discount").text(discount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+                    </script>
+                    @Html.HiddenFor(model => model.KHUYENMAI)
+                    @Html.HiddenFor(model => model.THANHTIEN)
+                    @Html.HiddenFor(model => model.PHISHIP)
+                    @Html.HiddenFor(model => model.TONGTIEN)
+                    @Html.HiddenFor(model => model.IDKH)
+                    <div class="row g-4 text-center align-items-center pt-4" style="justify-content:space-between;">
+                        <a href="/User/Cart/Index" type="button" class="btn border-secondary py-3 px-4 text-uppercase text-primary" style="width:250px;">Back to cart</a>
+                        <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase text-primary" style="width:250px;">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        }
+        <script>
+            // Sử dụng jQuery để kiểm tra xem người dùng đã chọn phương thức thanh toán hay chưa
+            $('#orderForm').submit(function () {
+                if (!$('input[name="selectedPaymentMethod"]').is(':checked')) {
+                    // Nếu không có phương thức thanh toán nào được chọn, hiển thị thông báo
+                    $('#paymentMethodError').show();
+                    return false; // Ngăn chặn gửi form đi
+                }
+            });
+        </script>
+    </div>
+</div>
+<!-- Checkout Page End -->
+<style>
+    .form-control[readonly] {
+        background-color: inherit;
+    }
+
+    .custom-dropdown {
+        background-color: white !important;
+    }
+
+    .custom-dropdown {
+        color: red !important;
+    }
+
+        .custom-dropdown option {
+            color: #45595b !important;
+        }
+</style>

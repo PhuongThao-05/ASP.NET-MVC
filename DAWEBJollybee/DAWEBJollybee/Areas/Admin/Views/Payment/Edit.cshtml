@@ -1,0 +1,67 @@
+﻿@model DAWEBJollybee.Models.PAYMENTMETHOD
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/prism/prism.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/components.css">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+
+</head>
+<body>
+    <div class="modal-dialog m-0" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-family: sans-serif;">Sửa phương thức thanh toán</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Edit", "Payment", FormMethod.Post, new { id = "editForm" }))
+            {
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group" style=" display: flex;flex-direction: column;">
+                            @Html.LabelFor(model => model.IDPAYMENT, new { @class = "control-label col-md-2", style = "font-size: 14px;padding-top: 12px;flex: none;max-width: max-content;" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.IDPAYMENT, new { htmlAttributes = new { @class = "form-control text-center", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.IDPAYMENT, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" style=" display: flex;flex-direction: column;">
+                            @Html.LabelFor(model => model.METHODNAME, new { @class = "control-label col-md-2", style = "font-size: 14px;padding-top: 12px;flex: none;max-width: max-content;" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.METHODNAME, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.METHODNAME, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button onclick="saveFormData()" class="btn btn-primary">Save changes</button>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

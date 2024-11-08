@@ -1,0 +1,217 @@
+﻿@model IEnumerable<DAWEBJollybee.Models.CHITIETDONHANG>
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+<div class="section-header" style="justify-content:space-between;">
+    <h1>Order Detail</h1>
+    <div>
+        <a href="/Admin/Donhang/Index" style="text-decoration: none; font-size: 16px;">Back to List Order <i class="fas fa-arrow-alt-circle-right" style="font-size: 16px;"></i></a>
+    </div>
+</div>
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            @{
+                List<DAWEBJollybee.Models.DONHANG> stdh = ViewBag.Stdh;
+                string buttonClass = (stdh.Any(d => d.LastestState == "Chờ xác nhận")) ? "btn-act" : "btn-act disabled";
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            <a href="@Url.Action("CreateDetail")" class="btn btn-primary btn-action btn-act @buttonClass" data-toggle="tooltip" title="Thêm" style="background-color: #80aaff; border: solid 1px #80aaff; box-shadow: 0 2px 6px #99bbff; margin-left: 32px; padding: 6px 16px; border-radius: 4px; ">
+                                <i class="fas fa-plus" style="font-size:18px;padding:5px 0;"></i>
+                            </a>
+                        </h4>
+                        <div class="card-header-form">
+                            <form>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.CurrentFilter">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary" type="submit" style="height:30.5px;"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped" style="text-align:center;">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IDDH)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Tên sản phẩm")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Hình ảnh sản phẩm")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SANPHAM.DONGIA)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SOLUONG)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.GIATIEN)
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IDDH)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SANPHAM.TENSP)
+                                        </td>
+                                        <td>
+                                            <img src="@Html.DisplayFor(modelItem => item.SANPHAM.HINHANH)" style="max-width: 100px; max-height: 100px;" />
+                                        </td>
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.SANPHAM.DONGIA)*@
+                                            @item.SANPHAM.DONGIA.Value.ToString("#,####") đ
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SOLUONG)
+                                        </td>
+                                        <td>
+                                            @* @Html.DisplayFor(modelItem => item.GIATIEN)*@
+                                            @item.GIATIEN.Value.ToString("#,####") đ
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("EditDetail",new { iddh=item.IDDH,idsp=item.IDSP})" class="EditModalButton btn btn-action btn-primary  mr-1 btn-act @buttonClass" data-toggle="tooltip" title="Sửa" style="background-color: #33cc33; border: solid 1px #33cc33; box-shadow: 0 2px 6px #99ff99;">
+                                                <i class="fas fa-pencil-alt" style="font-size: 11px;"></i>
+                                            </a>
+                                            <a href="#" data-iddh="@item.IDDH" data-idsp="@item.IDSP" class="DeleteModalButton btn btn-danger btn-action btn-act @buttonClass" data-toggle="tooltip" title="Xóa" style="background-color: #fc544b; border: solid 1px #fc544b; box-shadow: 0 2px 6px #fd9b96; ">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                            <style>
+                                .btn-primary.btn-act:active, .btn-primary.btn-act:focus, .btn-primary.btn-act:focus:active, .btn-primary.btn-act:hover {
+                                    background-color: #ffcccc !important;
+                                    box-shadow: 0 2px 6px #acb5f6 !important;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="createmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Nội dung modal được load từ AJAX sẽ được đặt ở đây -->
+                <div class="modal-body">
+                    <div id="error-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện click cho nút xóa
+        $('.DeleteModalButton').on('click', function (event) {
+            event.preventDefault();
+            var itemIddh = $(this).data('iddh');
+            var itemIdsp = $(this).data('idsp');
+            loadYourModal('/Admin/Donhang/DeleteDetail', 'deleteForm', itemIddh, itemIdsp);
+        });
+        // Submit form delete bằng AJAX
+        $('#createmodal').on('submit', '#deleteForm', function (event) {
+            event.preventDefault(); // Chặn hành động mặc định của form
+            saveFormData(); // Gọi hàm xử lý submit
+        });
+
+        // Hàm loadYourModal
+        function loadYourModal(actionUrl, formId, itemIddh, itemIdsp) {
+            $.ajax({
+                url: actionUrl,
+                type: 'GET',
+                data: { iddh: itemIddh, idsp: itemIdsp },
+                success: function (data) {
+                    $('#createmodal .modal-content').html(data);
+                    $('#createmodal').data('itemIddh', itemIddh);
+                    $('#createmodal').data('itemIdsp', itemIdsp);
+                    $('#createmodal').data('formId', formId);
+                    $('#createmodal').modal({
+                        show: true,
+                        backdrop: 'static',
+                    });
+                },
+                error: function () {
+                    alert('Failed to load modal content.');
+                }
+            });
+        }
+        // Hàm xử lý khi submit form delete
+        function saveFormData(event) {
+            var formId = $('#createmodal').data('formId');
+            var itemIddh = $('#createmodal').data('itemIddh');
+            var itemIdsp = $('#createmodal').data('itemIdsp');
+            $.ajax({
+                url: '/Admin/Donhang/DeleteDetail',
+                type: 'POST',
+                data: $('#' + formId).serialize() + '&iddh=' + itemIddh + '&idsp=' + itemIdsp, // Thêm IDDH và IDSP vào dữ liệu gửi đi
+                success: function (data) {
+                    if ($(data).find('.text-danger').length > 0) {
+                        $('#createmodal .modal-content').html(data);
+                    } else {
+                        $('#createmodal').modal('hide');
+                        $('#createmodal .modal-content').html('');
+                        // Kiểm tra xem có chuyển hướng hay không
+                        if (data.success && data.redirectUrl) {
+                            // Nếu có chuyển hướng, thực hiện chuyển hướng
+                            window.location.href = data.redirectUrl;
+                        }
+                    }
+                },
+                error: function () {
+                    alert('Failed to submit form.');
+                }
+            });
+            // Chặn sự kiện submit của form
+            event.preventDefault();
+        }
+    })
+</script>
+
+<style>
+    #createmodal {
+        background-color: rgba(0, 0, 0, 0.5); /* Màu nền đen với độ trong suốt */
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050 !important;
+    }
+
+    .modal-backdrop {
+        display: none !important;
+    }
+</style>
+<!-- General JS Scripts -->
+<script src="~/Assets/Admin/dist/assets/modules/jquery.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/tooltip.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/moment.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<script src="~/Assets/Admin/dist/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Page Specific JS File -->
+<script src="~/Assets/Admin/dist/assets/js/page/components-table.js"></script>

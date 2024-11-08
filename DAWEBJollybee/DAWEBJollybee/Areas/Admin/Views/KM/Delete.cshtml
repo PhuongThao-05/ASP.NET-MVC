@@ -1,0 +1,115 @@
+﻿@model DAWEBJollybee.Models.VOUCHER
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/modules/prism/prism.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Admin/dist/assets/css/components.css">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+
+</head>
+<body>
+    <div class="modal-dialog m-0" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-family: sans-serif;">Xóa phiếu khuyến mãi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <p style="font-weight: 600;margin-bottom: 5px;color: red;padding-top: 10px;padding-left: 25px;font-size: 16px;">Bạn có muốn xóa không?</p>
+            <div class="modal-body" style="padding-top: 10px; padding-bottom: 10px; justify-content: space-around; flex-direction: row; display: flex;">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IDCoupon):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IDCoupon)
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TENVOUCHER):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TENVOUCHER)
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayName("Active"):
+                        </dt>
+                        <dd>
+                            <input type="checkbox" @(@Model.StateCoupon.GetValueOrDefault() ? "checked" : "") class="custom-checkbox disabled" onclick="return false;" />
+                        </dd>
+                    </dl>
+                </div>
+                <div style="flex-direction: column; align-items: center;">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.GIATRI):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.GIATRI)
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.HSD):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.HSD)
+                        </dd>
+                    </dl>
+                </div>                
+            </div>
+            @using (Html.BeginForm("Delete", "KM", FormMethod.Post, new { id = "deleteForm" }))
+            {
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button onclick="saveFormData()" class="btn btn-primary btn-del" style="background-color: #fc544b; border: solid 1px #fc544b; box-shadow: 0 2px 6px #fd9b96; ">Delete</button>
+                </div>
+            }
+            <style>
+                .btn-primary.btn-del:active, .btn-primary.btn-del:focus, .btn-primary.btn-del:focus:active, .btn-primary.btn-del:hover {
+                    background-color: #ff3333 !important;
+                    box-shadow: 0 2px 6px #ff8080 !important;
+                }
+
+                dl {
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: 10px;
+                    gap: 10px;
+                    justify-content: space-between;
+                }
+                .custom-checkbox.disabled {
+                    pointer-events: none;
+                    opacity: 1;
+                }
+            </style>
+        </div>
+    </div>
+</body>
+</html>

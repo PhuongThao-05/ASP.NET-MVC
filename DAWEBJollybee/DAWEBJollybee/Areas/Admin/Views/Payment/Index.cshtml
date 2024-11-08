@@ -1,0 +1,262 @@
+﻿@model IEnumerable<DAWEBJollybee.Models.PAYMENTMETHOD>
+
+@{
+    Page.Title = "Payment Method";
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+<div class="section-header">
+    <h1>Payment Method</h1>
+</div>
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <a href="#" class="btn btn-primary btn-action btn-act" id="launchModalButton" data-toggle="tooltip" title="Thêm" style="background-color: #80aaff; border: solid 1px #80aaff; box-shadow: 0 2px 6px #99bbff; margin-left: 32px; padding: 6px 16px; border-radius: 4px; ">
+                            <i class="fas fa-plus" style="font-size:18px;padding:5px 0;"></i>
+                        </a>
+                    </h4>
+                    <div class="card-header-form">
+                        <form>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.CurrentFilter">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit" style="height:30.5px;"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="text-align:center;">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDPAYMENT)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.METHODNAME)
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IDPAYMENT)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.METHODNAME)
+                            </td>
+                            <td>
+                                <a href="#" data-id="@item.IDPAYMENT" class="EditModalButton btn btn-action btn-primary  mr-1 btn-act" data-toggle="tooltip" title="Sửa" style="background-color: #33cc33; border: solid 1px #33cc33; box-shadow: 0 2px 6px #99ff99;">
+                                    <i class="fas fa-pencil-alt" style="font-size: 11px;"></i>
+                                </a>
+                                <a href="#" data-id="@item.IDPAYMENT" class="DeleteModalButton btn btn-danger btn-action btn-act" data-toggle="tooltip" title="Xóa" style="background-color: #fc544b; border: solid 1px #fc544b; box-shadow: 0 2px 6px #fd9b96; ">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                            }
+                        </table>
+                        <style>
+                            .btn-primary.btn-act:active, .btn-primary.btn-act:focus, .btn-primary.btn-act:focus:active, .btn-primary.btn-act:hover {
+                                background-color: #ffcccc !important;
+                                box-shadow: 0 2px 6px #acb5f6 !important;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="createmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Nội dung modal được load từ AJAX sẽ được đặt ở đây -->
+                <div class="modal-body">
+                    <div id="error-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện click cho nút tạo mới
+        $('#launchModalButton').on('click', function (event) {
+            event.preventDefault();
+            loadCreateModal('/Admin/Payment/Create');
+        });
+        // Bắt sự kiện click cho nút chỉnh sửa
+        $('.EditModalButton').on('click', function (event) {
+            event.preventDefault();
+            var itemId = $(this).data('id');
+            loadYourModal('/Admin/Payment/Edit', 'editForm', itemId);
+        });
+        // Bắt sự kiện click cho nút xóa
+        $('.DeleteModalButton').on('click', function (event) {
+            event.preventDefault();
+            var itemId = $(this).data('id');
+            loadYourModal('/Admin/Payment/Delete/' + itemId, 'deleteForm', itemId);
+        });
+        // Submit form edit/delete bằng AJAX
+        $('#createmodal').on('submit', '#editForm, #deleteForm', function (event) {
+            event.preventDefault(); // Chặn hành động mặc định của form
+            saveFormData(); // Gọi hàm xử lý submit
+        });
+
+        // Submit form create bằng AJAX
+        $(document).ready(function () {
+            $('#createButton').on('click', function () {
+                saveCreateFormData();
+            });
+        });
+        // Hàm loadCreateModal
+        function loadCreateModal(actionUrl) {
+            // Sử dụng Ajax để load nội dung từ action của controller
+            $.ajax({
+                url: actionUrl,
+                type: 'GET',
+                success: function (data) {
+                    // Đặt nội dung vào modal container
+                    $('#createmodal .modal-content').html(data);
+
+                    // Hiển thị modal
+                    $('#createmodal').modal({
+                        show: true,
+                        backdrop: 'static',
+                    });
+                },
+                error: function () {
+                    alert('Failed to load modal content.');
+                }
+            });
+        }
+        // Hàm loadYourModal
+        function loadYourModal(actionUrl, formId, itemId) {
+            $.ajax({
+                url: actionUrl,
+                type: 'GET',
+                data: { id: itemId },
+                success: function (data) {
+                    $('#createmodal .modal-content').html(data);
+                    $('#createmodal').data('itemId', itemId);
+                    $('#createmodal').data('formId', formId);
+                    $('#createmodal').modal({
+                        show: true,
+                        backdrop: 'static',
+                    });
+                },
+                error: function () {
+                    alert('Failed to load modal content.');
+                }
+            });
+        }
+        // Hàm lấy URL tùy chọn dựa trên formId và itemId
+        function getActionUrl(formId, itemId) {
+                switch (formId) {
+                    case 'editForm':
+                        return '/Admin/Payment/Edit';
+                    case 'deleteForm':
+                        return '/Admin/Payment/Delete/' + itemId;
+                    default:
+                        return '';
+                }
+            }
+        // Hàm xử lý khi submit form edit/delete
+        function saveFormData(event) {
+            var formId = $('#createmodal').data('formId');
+            var itemId = $('#createmodal').data('itemId');
+            var actionUrl = getActionUrl(formId, itemId);
+
+            $.ajax({
+                url: actionUrl,
+                type: 'POST',
+                data: $('#' + formId).serialize(),
+                success: function (data) {
+                    if ($(data).find('.text-danger').length > 0) {
+                        $('#createmodal .modal-content').html(data);
+                    } else {
+                        $('#createmodal').modal('hide');
+                        $('#createmodal .modal-content').html('');
+                        // Kiểm tra xem có chuyển hướng hay không
+                        if (data.success && data.redirectUrl) {
+                            // Nếu có chuyển hướng, thực hiện chuyển hướng
+                            window.location.href = data.redirectUrl;
+                        }
+                    }
+                },
+                error: function () {
+                    alert('Failed to submit form.');
+                }
+            });
+            // Chặn sự kiện submit của form
+            event.preventDefault();
+        }
+    })
+    //Hàm submit form create
+    function saveCreateFormData() {
+        $.ajax({
+            url: '/Admin/Payment/Create',
+            type: 'POST',
+            data: $('#createForm').serialize(),
+            success: function (data) {
+                // Kiểm tra xem có lỗi hay không
+                if ($(data).find('.text-danger').length > 0) {
+                    // Nếu có lỗi, cập nhật form trong modal
+                    $('#createmodal .modal-content').html(data);
+                } else {
+                    // Nếu không có lỗi, đóng modal và giữ lại modal nhưng không hiển thị nội dung
+                    $('#createmodal').modal('hide');
+                    $('#createmodal .modal-content').html('');
+
+                    // Kiểm tra xem có chuyển hướng hay không
+                    if (data.success && data.redirectUrl) {
+                        // Nếu có chuyển hướng, thực hiện chuyển hướng
+                        window.location.href = data.redirectUrl;
+                    }
+                }
+            },
+            error: function () {
+                alert('Failed to submit form.');
+            }
+        });
+        // Ngăn chặn hành vi mặc định của form
+        event.preventDefault();
+    }
+</script>
+<style>
+    #createmodal {
+        background-color: rgba(0, 0, 0, 0.5); /* Màu nền đen với độ trong suốt */
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050 !important;
+    }
+
+    .modal-backdrop {
+        display: none !important;
+    }
+</style>
+<!-- General JS Scripts -->
+<script src="~/Assets/Admin/dist/assets/modules/jquery.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/popper.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/tooltip.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/modules/moment.min.js"></script>
+<script src="~/Assets/Admin/dist/assets/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<script src="~/Assets/Admin/dist/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Page Specific JS File -->
+<script src="~/Assets/Admin/dist/assets/js/page/components-table.js"></script>

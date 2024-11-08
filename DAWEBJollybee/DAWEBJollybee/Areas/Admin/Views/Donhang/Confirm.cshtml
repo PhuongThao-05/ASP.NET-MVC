@@ -1,0 +1,245 @@
+﻿@model DAWEBJollybee.Models.DONHANG
+
+@{
+    ViewBag.Title = "IndexState";
+    Layout = "~/Areas/Admin/Views/Shared/AdminHome_Layout.cshtml";
+}
+<div class="section-header" style="justify-content:space-between;">
+    <h1>Confirm Order</h1>
+    <div>
+        <a href="/Admin/Donhang/Index" style="text-decoration: none; font-size: 16px;">Back to List Order <i class="fas fa-arrow-alt-circle-right" style="font-size: 16px;"></i></a>
+    </div>
+</div>
+<div class="section-body">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Thông tin đơn hàng</h4>
+                </div>
+                <div class="card-body">
+                    <div class="media-body">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.IDDH):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.IDDH)
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayName("Tên khách hàng"):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.KHACHHANG.HOTEN)
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayName("Số điện thoại"):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.KHACHHANG.SDT)
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayName("Địa chỉ"):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.KHACHHANG.DIACHI)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Chi tiết đơn hàng</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled list-unstyled-border">
+                        @{
+                            List<DAWEBJollybee.Models.CHITIETDONHANG> dh = ViewBag.Orders;
+                            for (int i = 0; i < dh.Count; i++)
+                            {
+                                <li class="media">
+                                    <img class="mr-3 rounded" width="65" src="@dh[i].SANPHAM.HINHANH" alt="product">
+                                    <div class="media-body">
+                                        <div class="float-right"><div class="font-weight-600 text-muted text-small">x @dh[i].SOLUONG</div></div>
+                                        <div class="media-title">@dh[i].SANPHAM.TENSP</div>
+                                        <div class="mt-1">
+                                            <div class="budget-price">
+                                                <div class="budget-price-label" style="margin-left:0;">Đơn giá: @Html.FormatValue(dh[i].SANPHAM.DONGIA, "{0:#,####}") đ</div>
+                                            </div>
+                                            <div class="budget-price">
+                                                <div class="budget-price-label" style="color: #00cc44; margin-left: 0; "> Thành tiền: @Html.FormatValue(dh[i].GIATIEN, "{0:#,####}") đ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="card-footer pt-3 d-flex justify-content-center">
+                    <div class="budget-price justify-content-center">
+                        <div class="budget-price-label" style="font-size:14px;">Tổng tiền:</div>
+                        <div class="budget-price-label" style="font-size:14px;color:red;">@Html.DisplayFor(model => model.TONGTIEN) đ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Trạng thái đơn hàng</h4>
+                    <div class="card-header-action">
+                        <a href="#" class="btn btn-danger cancelOrder">Cancel</a>
+                        <a href="#" class="btn btn-danger createStateLink btn-act" data-currentstate="Đang chuẩn bị đơn hàng" data-url="/Admin/Donhang/Preparing" data-id="@Session["IDDH"]">Confirm</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled list-unstyled-border">
+                        @{
+                            List<DAWEBJollybee.Models.TRANGTHAIDH> s = ViewBag.State;
+                            for (int i = 0; i < s.Count; i++)
+                            {
+                                <li class="media">
+                                    <div class="media-title" style="margin-right:10px;">@(i+1).</div>
+                                    <div class="media-body">
+                                        <div class="float-right"><div class="font-weight-600 text-muted text-small">@Html.FormatValue(s[i].StateTime, "{0:dd/MM/yyyy HH:mm}")</div></div>
+                                        @if (i == ((s.Count) - 1) && s[i].CurrentState == "Hủy đơn hàng")
+                                        {
+                                            <div class="media-title" style="color:red;">@s[i].CurrentState</div>
+                                        }
+                                        else if (i == (s.Count) - 1)
+                                        {
+                                            <div class="media-title" style="color:deepskyblue;">@s[i].CurrentState</div>
+                                        }
+
+                                        else
+                                        {
+                                            <div class="media-title">@s[i].CurrentState</div>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderModalLabel" style="font-family: sans-serif;">Xác nhận hủy đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding-top: 20px !important; margin: auto; font-weight: 600; color: red; font-size: 16px; padding-bottom: 0; ">
+                Bạn có muốn hủy đơn hàng này không?
+            </div>
+            <div class="modal-footer">
+                <div class="modal-footer" style=" padding-right: 0px;">
+                    <button type="button" class="btn btn-secondary cancelOrderNo" data-dismiss="modal" style="width:100px;">Không</button>
+                    <button type="button" class="btn btn-danger createStateLink" style="width:100px;" data-currentstate="Hủy đơn hàng" data-url="/Admin/Donhang/IndexState" data-id="@Session["IDDH"]">Đồng ý</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    #cancelOrderModal {
+        background-color: rgba(0, 0, 0, 0.5); /* Màu nền đen với độ trong suốt */
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050 !important;
+    }
+
+    .modal-backdrop {
+        display: none !important;
+    }
+    dl {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+        gap: 20px;
+    }
+
+    .btn-act {
+        color: black;
+        background-color: PaleGreen;
+        border: 1px solid PaleGreen;
+        box-shadow: 0 2px 6px #bdf5bd !important;
+    }
+
+        .btn-act:active, btn-act:focus, .btn-act:focus:active, .btn-act:hover {
+            background-color: #7bea7b !important;
+            box-shadow: none !important;
+        }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.cancelOrder').on('click', function (event) {
+            event.preventDefault();
+            $('#cancelOrderModal').modal('show');
+        });
+        $('.cancelOrderNo').on('click', function () {
+            // Đóng modal popup
+            $('#cancelOrderModal').modal('hide');
+        });
+        $('#cancelOrderModal').on('hidden.bs.modal', function () {
+            // Đóng modal popup khi nó được ẩn đi
+            $('#cancelOrderModal').modal('hide');
+        });
+    $('.createStateLink').click(function (e) {
+        e.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+        var newCurrentState = $(this).data('currentstate');
+        var id = $(this).data('id');
+        var url = $(this).data('url');
+
+        // Kiểm tra xem ID có được chỉ định hay không
+        if (id) {
+            url += "/" + id;
+        }
+
+        $.ajax({
+            url: '@Url.Action("CreateState", "Donhang")',
+            type: 'POST',
+            data: { currentState: newCurrentState },
+            success: function (result) {
+                if (result.success) {
+                    window.location.href = url;
+                } else {
+                    // Xử lý lỗi nếu cần
+                    console.error(result.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Đã xảy ra lỗi khi gửi yêu cầu AJAX");
+                // Xử lý lỗi nếu có
+            }
+        });
+    });
+   });
+</script>

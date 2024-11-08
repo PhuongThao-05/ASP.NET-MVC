@@ -1,0 +1,232 @@
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.dll.config
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.pdb
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.exe
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.exe.config
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.rsp
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.exe
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.exe.config
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.rsp
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Managed.Core.targets
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Collections.Immutable.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Reflection.Metadata.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.exe
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.exe.config
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.rsp
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\VBCSCompiler.exe
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\VBCSCompiler.exe.config
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\EntityFramework.SqlServer.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.Web.Infrastructure.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Helpers.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Mvc.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Razor.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Deployment.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Razor.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\EntityFramework.SqlServer.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Razor.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Deployment.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Razor.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Helpers.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Mvc.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.CoreCompileInputs.cache
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.CopyComplete
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.pdb
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.dll.config
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.pdb
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.exe
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.exe.config
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.rsp
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.exe
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.exe.config
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.rsp
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Managed.Core.targets
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.AppContext.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Collections.Immutable.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Console.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Globalization.Calendars.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.IO.Compression.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.IO.FileSystem.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Net.Http.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Net.Sockets.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Reflection.Metadata.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.ValueTuple.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Xml.XmlDocument.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Xml.XPath.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.exe
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.exe.config
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.rsp
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\VBCSCompiler.exe
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\VBCSCompiler.exe.config
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\EntityFramework.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\EntityFramework.SqlServer.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.Web.Infrastructure.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Helpers.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Mvc.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Razor.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Deployment.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Razor.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\EntityFramework.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\EntityFramework.SqlServer.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Razor.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Deployment.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Razor.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Helpers.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Mvc.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.AssemblyReference.cache
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.CoreCompileInputs.cache
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.CopyComplete
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.dll
+D:\ĐoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.pdb
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.dll.config
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\DAWEBJollybee.pdb
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.exe
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.exe.config
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csc.rsp
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.exe
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.exe.config
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\csi.rsp
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Managed.Core.targets
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Collections.Immutable.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Reflection.Metadata.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.exe
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.exe.config
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\vbc.rsp
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\VBCSCompiler.exe
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\VBCSCompiler.exe.config
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\EntityFramework.SqlServer.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.Web.Infrastructure.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Helpers.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Mvc.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Razor.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Deployment.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Razor.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\EntityFramework.SqlServer.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Razor.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Deployment.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Webpages.Razor.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Helpers.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Web.Mvc.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.CoreCompileInputs.cache
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.CopyComplete
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.pdb
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\PagedList.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\PagedList.Mvc.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\PagedList.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\PagedList.Mvc.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Buffers.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Memory.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Numerics.Vectors.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Text.Encodings.Web.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Buffers.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Memory.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Numerics.Vectors.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Text.Encodings.Web.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Buffers.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Memory.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Numerics.Vectors.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.AssemblyReference.cache
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Buffers.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Memory.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Numerics.Vectors.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\PagedList.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\PagedList.Mvc.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Buffers.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Memory.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Numerics.Vectors.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Text.Encodings.Web.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\PagedList.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\PagedList.Mvc.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Buffers.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Memory.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Numerics.Vectors.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Text.Encodings.Web.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.AspNetCore.Http.Features.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.Extensions.Primitives.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.IO.Pipelines.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Threading.Tasks.Extensions.dll
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.AspNetCore.Http.Features.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.Extensions.Primitives.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.IO.Pipelines.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Threading.Tasks.Extensions.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.AspNetCore.Http.Features.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.Extensions.Primitives.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.IO.Pipelines.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Threading.Tasks.Extensions.dll
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.AspNetCore.Http.Features.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\Microsoft.Extensions.Primitives.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.IO.Pipelines.xml
+D:\LT-web NC\Đồ án WEB\DA-WEB\DAWEBJollybee\DAWEBJollybee\bin\System.Threading.Tasks.Extensions.xml
+D:\DoAnWeb\DA-WEB\DAWEBJollybee\DAWEBJollybee\obj\Debug\DAWEBJollybee.csproj.AssemblyReference.cache

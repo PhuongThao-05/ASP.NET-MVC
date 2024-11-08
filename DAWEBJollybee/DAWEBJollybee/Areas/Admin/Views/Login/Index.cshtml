@@ -1,0 +1,68 @@
+﻿@model DAWEBJollybee.Models.NGUOIDUNG
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Login Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Assets/Admin/Login/css/style.css">
+</head>
+<body class="img js-fullheight" style="background-image: url(/Assets/Admin/Login/images/bg1.jpg);">
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Admin account</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        <h3 class="mb-4 text-center">Start to administer</h3>
+                        @using (Html.BeginForm("Index", "Login", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "signin-form" }))
+                        {
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "color: #ffcc99!important;" })
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.USERNAME, new { @class = "form-control", @placeholder = "Username" })
+                                <div>@Html.ValidationMessageFor(m => m.USERNAME, "", new { @class = "text-danger", style = "color: #ffcc99!important;" })</div>
+                            </div>
+                            <div class="form-group">
+                                @Html.PasswordFor(m => m.PASSWORD, new { @class = "form-control", @id = "password-field", @placeholder = "Password" })
+                                <span toggle="#password-field"
+                                      class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                            <div>@Html.ValidationMessageFor(m => m.PASSWORD, "", new { @class = "text-danger", style = "color: #ffcc99 !important;" })</div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50">
+                                    <label class="checkbox-wrap checkbox-primary">
+                                        Remember Me
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a href="#" style="color: #fff">Forgot Password</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Assets/Admin/Login/js/jquery.min.js"></script>
+    <script src="~/Assets/Admin/Login/js/popper.js"></script>
+    <script src="~/Assets/Admin/Login/js/bootstrap.min.js"></script>
+    <script src="~/Assets/Admin/Login/js/main.js"></script>
+</body>
+
+</html>

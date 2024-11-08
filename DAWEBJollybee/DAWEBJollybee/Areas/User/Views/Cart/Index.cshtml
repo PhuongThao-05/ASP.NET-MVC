@@ -1,0 +1,281 @@
+﻿
+@model IEnumerable<DAWEBJollybee.Models.Metadata.CARTMetadata>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/User/Views/Shared/Home_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Xóa các tham số không mong muốn khỏi URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+</script>
+<script>
+        $(function () {
+            $(".remove").click(function () {
+                var productId = $(this).data("productid");
+                var model = { Id: productId };
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Remove", "Cart")',
+                    data: JSON.stringify(model),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        $('#CartCount').text(parseInt($('#CartCount').text()) - 1);
+                        $("#product-" + productId).remove();
+                        calculateTotal(); // Thêm dòng này để tính toán lại tổng tiền sau khi xóa sản phẩm
+                    },
+                    error: function () {
+                        alert("Lỗi trong khi xóa giỏ hàng!");
+                    }
+                });
+                return false;
+            });
+        });
+
+        function updateQuantity(productId, change) {
+            var quantityInput = $("#ipQuantity_" + productId);
+            var currentQuantity = parseInt(quantityInput.val());
+            var newQuantity = currentQuantity + change;
+            if (newQuantity > 10) {
+                newQuantity = 10;
+            } else if (newQuantity < 1) {
+                newQuantity = 1;
+            }
+            quantityInput.val(newQuantity);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("UpdateQuantity", "Cart")',
+                data: { id: productId, quantity: newQuantity },
+                success: function (response) {
+                    if (response.success) {
+                        var amountElement = $("#amount_" + productId);
+                        amountElement.text(response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                        $('#CartCount').text(response.totalCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                        calculateTotal();
+                        updateSelectAllCheckbox(); // Thêm dòng này để tính toán lại tổng tiền sau khi cập nhật số lượng
+                    } else {
+                        alert("Không thể cập nhật số lượng.");
+                    }
+                },
+                error: function () {
+                    alert("Lỗi khi cập nhật số lượng.");
+                }
+            });
+        }
+    $(document).ready(function () {
+        // Xử lý sự kiện khi nhấn vào ô select ở trên cùng
+        $('#select-all').change(function () {
+            var isChecked = $(this).is(':checked');
+            $('input[type="checkbox"]').prop('checked', isChecked);
+            calculateTotal();
+        });
+
+        // Xử lý sự kiện khi nhấn vào mỗi ô select
+        $('input[type="checkbox"]').change(function () {
+            calculateTotal();
+            updateSelectAllCheckbox();
+        });
+    });
+
+        // Hàm tính tổng tiền
+        function calculateTotal() {
+            var total = 0;
+            $('input[type="checkbox"]:checked').each(function () {
+                var amount = parseFloat($(this).closest('tr').find('.amount').text().replace(/\D/g, ''));
+                if (!isNaN(amount)) {
+                    total += amount;
+                }
+            });
+            $('#total').text(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            console.log("Total:", total);
+        }
+
+        // Hàm cập nhật ô select trên cùng
+        function updateSelectAllCheckbox() {
+            var totalCheckboxes = $('input[type="checkbox"]').length;
+            var checkedCheckboxes = $('input[type="checkbox"]:checked').length;
+            $('#select-all').prop('checked', totalCheckboxes === checkedCheckboxes);
+    }
+</script>
+
+
+<!-- Modal Search Start -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center">
+                <div class="input-group w-75 mx-auto d-flex">
+                    <input type="search" class="form-control p-3" placeholder="keywords"
+                           aria-describedby="search-icon-1">
+                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Search End -->
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Cart</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Cart</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+<!-- Cart Page Start -->
+<div class="container-fluid py-5">
+    <div style=" margin: 0 66px; padding: 5px 12px;">
+        <a href="/User/ProductGrid/Index" class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Continue Shopping</a>
+    </div>
+    <div class="container py-5">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"><input type="checkbox" id="select-all" style="height: 18px;width: 18px;margin-right: 10px;">Select</th>
+                        <th scope="col">Products</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr id="product-@item.Product.IDSP">
+                                <td><input type="checkbox" class="checkbox-product" style="height: 18px;width: 18px; margin: 30px 0 0;"></td>
+
+                                <th scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <img src="@item.Product.HINHANH" class="img-fluid me-5 rounded-circle"
+                                             style="width: 80px; height: 80px;" alt="">
+                                    </div>
+                                </th>
+                                <td>
+                                    <p class="mb-0 mt-4"> @item.Product.TENSP</p>
+                                </td>
+
+                                <td>
+                                    <p class="mb-0 mt-4">@Html.FormatValue(item.Product.DONGIA, "{0:#,###}")</p>
+                                </td>
+
+
+                                <td>
+                                    <div class="input-group mt-4" style="width: 100px;">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="updateQuantity('@item.Product.IDSP', -1)">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <input type="text" id="ipQuantity_@item.Product.IDSP" class="form-control form-control-sm text-center border-0" value="@item.Quantity">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="updateQuantity('@item.Product.IDSP', 1)">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+
+                                <td class="amount">
+                                    <p class="mb-0 mt-4" id="amount_@item.Product.IDSP">@Html.FormatValue(item.Amount, "{0:#,###}")</p>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="#" class="remove" data-productid="@item.Product.IDSP" style="padding-left:25px; height: 100%;">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7">Không có sản phẩm trong giỏ hàng</td>
+                        </tr>
+                    }
+                </tbody>
+
+
+            </table>
+        </div>
+        <span id="ErrorCart" class="error-message"> <i class="fas fa-exclamation-circle" style="color:white;"></i> Vui lòng chọn chọn sản phẩm để thanh toán</span>
+        <div class="row g-4 justify-content-end">
+            <div class="col-8"></div>
+            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                <div class="bg-light rounded">
+                    <div class="p-4">
+                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                        <div class="d-flex justify-content-between mb-4" style="align-items: center;">
+                            <h5 class="mb-0 me-4">Total:</h5>
+                            <p class="mb-0" style="font-weight: 600; color: red; font-size: 1.3rem;"><span id="total">0</span> đ</p>
+                        </div>
+                        <button id="CheckoutBtn" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4" style="margin-left: 150px;">
+                            Proceed Checkout
+                        </button>
+                        <script>
+                            $(document).ready(function () {
+                                $('#CheckoutBtn').click(function () {
+                                    var selectedProducts = [];
+                                    var total = parseFloat($('#total').text().replace(/\D/g, ''));;
+                                    console.log("Total:", total);
+                                    $('input[type="checkbox"].checkbox-product:checked').each(function () {
+                                        var productId = $(this).closest('tr').attr('id'); // Lấy id của hàng tr
+                                        productId = productId.replace('product-', ''); // Loại bỏ phần "product-" để chỉ lấy phần số
+                                        var quantity = $(this).closest('tr').find('input[type="text"]').val(); // Lấy số lượng từ trường input trong hàng tr
+                                        var amount = parseFloat($(this).closest('tr').find('.amount').text().replace(/\D/g, ''));
+                                        console.log("ProductId:", productId);
+                                        console.log("Quantity:", quantity);
+                                        console.log("Amount:", amount);
+                                        selectedProducts.push({ ProductId: productId, Quantity: quantity, Amount: amount });
+                                    });
+                                    if (!$('input[type="checkbox"].checkbox-product').is(':checked')) {
+                                        $('#ErrorCart').show();
+                                        return false;
+                                    }
+                                    else {
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/User/Checkout/SelectedItem',
+                                            data: { selectedProducts: selectedProducts, total: total },
+                                            success: function (response) {
+                                                console.log("Dữ liệu trả về:", response);
+                                                window.location.href = '/User/Checkout/Create';
+                                            },
+                                            error: function (xhr, status, error) {
+                                                // Xử lý lỗi nếu có
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .error-message {
+        font-size: 14px;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid #ffb3b3;
+        background-color: #ffcccc;
+        padding: 5px 10px;
+        margin-top: 5px;
+        display: none;
+    }
+</style>
+<!-- Cart Page End -->
